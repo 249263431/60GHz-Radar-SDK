@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60G Breathing Sleep Radar - WiFi Communication Document (Full Translation V2.1)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e2a3a;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px;
+            background-color: #f8fafc;
+        }
+        .document-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 40px;
+        }
+        h1, h2, h3, h4 {
+            color: #0f172a;
+            margin-top: 1.8em;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.4em;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3b82f6;
+            margin-bottom: 1.2em;
+        }
+        h2 {
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            background-color: #f8fafc;
+        }
+        pre, code {
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+        }
+        pre {
+            padding: 16px;
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background-color: #fefce8;
+            margin: 16px 0;
+        }
+        code {
+            padding: 0.2em 0.4em;
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #eef2ff;
+            font-weight: 600;
+        }
+        .note {
+            background-color: #fffbeb;
+            border-left: 5px solid #f59e0b;
+            padding: 12px 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .warning {
+            background-color: #fef2f2;
+            border-left: 5px solid #ef4444;
+            padding: 12px 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .info {
+            background-color: #eff6ff;
+            border-left: 5px solid #3b82f6;
+            padding: 12px 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .badge {
+            background-color: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        hr {
+            margin: 32px 0;
+            border: none;
+            border-top: 1px solid #cbd5e1;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 48px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 24px;
+        }
+        ul, ol {
+            margin: 8px 0 16px 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="document-container">
+    <h1>60G Breathing Sleep Radar - WiFi Communication Document</h1>
+    <p><strong>Product Manual (Ver. 2.1)</strong> – Reference</p>
+
+    <h2>Table of Contents</h2>
+    <ul>
+        <li>MQTT Communication Data Format Description (V2.0) – Section 1</li>
+        <li>Radar Functional Attributes – Section 2</li>
+        <li>Restricted Functional Attribute Reporting – Section 3</li>
+        <li>Setting QoS Quality of Service – Section 4</li>
+        <li>OTA Upgrade – Section 5</li>
+        <li>Historical Version Update Notes</li>
+    </ul>
+
+    <h2>1. Description</h2>
+    <p>This document mainly describes the MQTT protocol format for the 60G breathing and heartbeat radar device, helping users to obtain and set radar data for development convenience. Data content is transmitted in JSON format.</p>
+    <p>There are 2 topics for the 60G radar, as follows:</p>
+    <ul>
+        <li><strong>(1) Topic: <code>/Radar60SP/DeviceID/sys/property/post</code></strong> – Reporting topic, through which the radar device reports data and setting response messages.</li>
+        <li><strong>(2) Topic: <code>/Radar60SP/DeviceID/sys/property/set</code></strong> – Sending topic, through which clients publish messages to the radar device.</li>
+    </ul>
+
+    <h2>2. Radar Functional Attributes</h2>
+
+    <h3>Online/Offline (online)</h3>
+    <p>Active reporting. Attribute status: 0 (offline), 1 (online). Status changes are actively reported.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "online": "0"   // device offline
+    }
+}</pre>
+
+    <h3>Initialization Complete (initFinish)</h3>
+    <p>No active reporting. Data range: 0 (initialization incomplete), 1 (initialization complete). Supports query.</p>
+    <pre>// Query format:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "initFinish": "?"
+    }
+}
+
+// Response format:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",   // "fail" on failure, "success" on success
+    "params": {
+        "initFinish": "XXXX"
+    }
+}</pre>
+
+    <h3>Heartbeat (heartBeat)</h3>
+    <p>Active reporting. Attribute status: 0 (abnormal), 1 (normal). Status changes are actively reported.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "heartBeat": "0"
+    }
+}</pre>
+
+    <h3>Product Model (productMode) – Not available yet</h3>
+    <p>No active reporting. Data length: 11 bytes. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "productMode": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "productMode": "XXXX"
+    }
+}</pre>
+
+    <h3>Product ID (productId) – Not available yet</h3>
+    <p>No active reporting. Data length: 11 bytes. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "productId": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "productId": "XXXX"
+    }
+}</pre>
+
+    <h3>Hardware Model (hardwareModel)</h3>
+    <p>No active reporting. Data length: 11 bytes. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "hardwareModel": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "hardwareModel": "XXXX"
+    }
+}</pre>
+
+    <h3>Firmware Version (firmwareVersion)</h3>
+    <p>Active reporting. Data length: 15 bytes.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "firmwareVersion": "xxxx"
+    }
+}
+
+// Supports query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "firmwareVersion": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "firmwareVersion": "xxxx"
+    }
+}</pre>
+
+    <h3>WiFi Firmware Version (firmwareVersionWiFi)</h3>
+    <p>Actively reported when device powers on and connects to the server.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "firmwareVersionWiFi": "xxxxxxx"
+    }
+}
+
+// Supports query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "firmwareVersionWiFi": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "firmwareVersionWiFi": "XXXX"
+    }
+}</pre>
+
+    <h3>Radar Fault (radarFault) – Not available</h3>
+    <p>Active reporting. Attribute value range: 0–255. Status changes actively reported.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "radarFault": "100"
+    }
+}</pre>
+
+    <h3>Work Duration (workDuration) – Not available</h3>
+    <p>Active reporting. Attribute length: 4 bytes, range: 0x3C – 0xFFFFFFFF, unit: seconds. Periodic reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "workDuration": "100"
+    }
+}
+
+// Supports query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "workDuration": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "workDuration": "100"
+    }
+}</pre>
+
+    <h3>Work Duration Reporting Frequency (workDurationReportFrequency) – Not available</h3>
+    <p>No active reporting. Attribute range: 0–60, unit: minutes. 0 = function disabled. Supports query and set.</p>
+    <pre>// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "workDurationReportFrequency": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "workDurationReportFrequency": "1"
+    }
+}
+
+// Set:
+{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "workDurationReportFrequency": "2"
+    }
+}
+
+// Set response:
+{
+    "version": "1.0",
+    "opt": "set",
+    "res": "success",
+    "params": {
+        "workDurationReportFrequency": "2"
+    }
+}</pre>
+
+    <h3>Work Mode (workMode) – Not available</h3>
+    <p>No active reporting. Attribute range: 1 (working mode), 2 (standby mode), 3 (test mode). Supports query and set.</p>
+    <pre>// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "workMode": "?"
+    }
+}
+
+// Set:
+{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "workMode": "1"
+    }
+}
+
+// Response (set):
+{
+    "version": "1.0",
+    "opt": "set",
+    "res": "success",
+    "params": {
+        "workMode": "1"
+    }
+}</pre>
+
+    <h3>Scene Mode (sceneMode) – Not available</h3>
+    <p>No active reporting. Attribute range: 1 (bedroom), 2 (living room/bathroom). Supports query and set.</p>
+    <pre>// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "sceneMode": "?"
+    }
+}
+
+// Set:
+{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "sceneMode": "2"
+    }
+}
+
+// Set response:
+{
+    "version": "1.0",
+    "opt": "set",
+    "res": "success",
+    "params": {
+        "sceneMode": "2"
+    }
+}</pre>
+
+    <h3>Installation Angle (installAngle) – Not available</h3>
+    <p>No active reporting. Attribute consists of x, y, z axes. Supports query and set.</p>
+    <pre>// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "installAngle": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "installAngle": {
+            "x": "xxx",
+            "y": "xxx",
+            "z": "xxx"
+        }
+    }
+}
+
+// Set:
+{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "installAngle": {
+            "x": "90",
+            "y": "0",
+            "z": "0"
+        }
+    }
+}
+
+// Set response:
+{
+    "version": "1.0",
+    "opt": "set",
+    "res": "success",
+    "params": {
+        "installAngle": {
+            "x": "90",
+            "y": "0",
+            "z": "0"
+        }
+    }
+}</pre>
+
+    <h3>Installation Height (installHeight) – Not available</h3>
+    <p>No active reporting. Attribute range: 170–310, unit: cm. Supports query and set.</p>
+    <pre>// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "installHeight": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "installHeight": "1"
+    }
+}
+
+// Set:
+{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "installHeight": "2"
+    }
+}
+
+// Set response:
+{
+    "version": "1.0",
+    "opt": "set",
+    "res": "success",
+    "params": {
+        "installHeight": "2"
+    }
+}</pre>
+
+    <h3>Moving Target Maximum Detectable Distance (movingTargetDetectionMaxDistance) – Not available</h3>
+    <p>No active reporting. Attribute range: 0–65535, unit: cm, step: 1 cm. Supports query and set.</p>
+
+    <h3>Static Target Maximum Detectable Distance (staticTargetDetectionMaxDistance) – Not available</h3>
+    <p>No active reporting. Attribute range: 0–65535, unit: cm, step: 1 cm. Supports query and set.</p>
+
+    <h3>Location Out of Bounds Status (locationOutOfBounds)</h3>
+    <p>Active reporting. Attribute range: 0 (outside range), 1 (within range). Status change reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "locationOutOfBounds": "0"
+    }
+}
+
+// Supports query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "locationOutOfBounds": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "locationOutOfBounds": "1"
+    }
+}</pre>
+
+    <h3>Human Body Function Switch (humanSwitch)</h3>
+    <p>No active reporting. Range: 1 (function on), 0 (function off). Supports query and set.</p>
+
+    <h3>Human Presence Status (someoneExists)</h3>
+    <p>Active reporting. Attribute range: 0 (no one), 1 (someone). Status change reporting. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "someoneExists": "0"
+    }
+}
+
+// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "someoneExists": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "someoneExists": "1"
+    }
+}</pre>
+
+    <h3>Motion Status (motionStatus)</h3>
+    <p>Active reporting. Attribute range: 0 (no motion), 1 (motion). Supports query.</p>
+
+    <h3>Motion Signs Parameter (movementSigns)</h3>
+    <p>Active reporting. Attribute range: 0–100. Supports query.</p>
+
+    <h3>Human Distance (humanDistance)</h3>
+    <p>Active reporting. Attribute range: 0–65535, unit: cm. Periodic reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "humanDistance": "1"
+    }
+}
+
+// Supports query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "humanDistance": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "humanDistance": "1"
+    }
+}</pre>
+
+    <h3>Human Position (humanPosition)</h3>
+    <p>Active reporting. Attribute ranges: x-axis: 0–65535, y-axis: 0–65535, z-axis: 0–65535. Periodic reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "humanPosition": {
+            "x": "xxx",
+            "y": "xxx",
+            "z": "xxx"
+        }
+    }
+}
+
+// Query (x, y, z together):
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "humanPosition": {"x": "?", "y": "?", "z": "?"}
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "humanPosition": {
+            "x": "xxx",
+            "y": "xxx",
+            "z": "xxx"
+        }
+    }
+}</pre>
+
+    <h3>Motion Signs Reporting Frequency (movementSignsReportFrequency) – Not available</h3>
+    <p>No active reporting. Attribute range: 0–100. Supports set.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "movementSignsReportFrequency": "1"
+    }
+}</pre>
+
+    <h3>Breathing Function Switch (breathSwitch)</h3>
+    <p>No active reporting. Range: 1 (function on), 0 (function off). Supports query and set.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "breathSwitch": "?"
+    }
+}
+
+// Set:
+{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "breathSwitch": "1"
+    }
+}</pre>
+
+    <h3>Breathing Information (breathInform)</h3>
+    <p>Active reporting. Attribute range: 1 (normal), 2 (too high), 3 (too low), 4 (detecting). Status change reporting. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "breathInform": "1"
+    }
+}
+
+// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "breathInform": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "get",
+    "res": "success",
+    "params": {
+        "breathInform": "1"
+    }
+}</pre>
+
+    <h3>Breathing Value (breathValue)</h3>
+    <p>Active reporting. Attribute range: 0–30. Status change reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "breathValue": "1"
+    }
+}</pre>
+
+    <h3>Breathing Intensity (breathIntensity) – Not available</h3>
+    <p>Active reporting. Attribute range: 0–100. Status change reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "breathIntensity": "1"
+    }
+}</pre>
+
+    <h3>Breathing Confidence (breathConfidence) – Not available</h3>
+    <p>Active reporting. Attribute range: 0–100. Status change reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "breathConfidence": "1"
+    }
+}</pre>
+
+    <h3>Breathing Waveform (breathWave)</h3>
+    <p>Active reporting. Each report contains 5 integer values, range 0–255. Periodic reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "breathWave": [128, 128, 128, 128, 128]
+    }
+}</pre>
+
+    <h3>Breathing Value Reporting Frequency (breathValueReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Breathing Intensity Reporting Frequency (breathIntensityReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Breathing Confidence Reporting Frequency (breathConfidenceReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Breathing Waveform Reporting Frequency (breathWaveReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Heart Rate Function Switch (heartRateSwitch) – Not available</h3>
+    <p>No active reporting. Range: 1 (on), 0 (off). Supports query and set.</p>
+
+    <h3>Heart Rate Information (heartRateInform) – Not available</h3>
+    <p>Active reporting. Attribute range: 1 (normal), 2 (too high), 3 (too low), 4 (detecting). Status change reporting. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "heartRateInform": "1"
+    }
+}</pre>
+
+    <h3>Heart Rate Value (heartRateValue)</h3>
+    <p>Active reporting. Attribute range: 60–120. Status change reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "heartRateValue": "1"
+    }
+}</pre>
+
+    <h3>Heart Rate Intensity (heartRateIntensity) – Not available</h3>
+    <p>Active reporting. Attribute range: 0–100. Status change reporting.</p>
+
+    <h3>Heart Rate Confidence (heartRateConfidence) – Not available</h3>
+    <p>Active reporting. Attribute range: 0–100. Status change reporting.</p>
+
+    <h3>Heart Rate Waveform (heartRateWave)</h3>
+    <p>Active reporting. Each report contains 5 integer values, range 0–255. Periodic reporting.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "heartRateWave": [128, 128, 128, 128, 128]
+    }
+}</pre>
+
+    <h3>Heart Rate Value Reporting Frequency (heartRateValueReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Heart Rate Intensity Reporting Frequency (heartRateIntensityReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Heart Rate Confidence Reporting Frequency (heartRateConfidenceReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Heart Rate Waveform Reporting Frequency (heartRateWaveReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Sleep Function Switch (sleepSwitch)</h3>
+    <p>No active reporting. Range: 1 (on), 0 (off). Supports query and set.</p>
+
+    <h3>Sleep Status (sleepStatus)</h3>
+    <p>Active reporting. Attribute range: 0 (awake), 1 (light sleep), 2 (deep sleep), 3 (falling asleep), 4 (sleeping). Status change reporting. Supports query.</p>
+
+    <h3>In/Out of Bed Status (getIntoBed)</h3>
+    <p>Active reporting. Attribute range: 0 (out of bed), 1 (in bed). Status change reporting. Supports query.</p>
+
+    <h3>Awake Duration (awakeDuration)</h3>
+    <p>Active reporting. Attribute range: 0–65536. Status change reporting. Supports query.</p>
+
+    <h3>Light Sleep Duration (lightSleepDuration)</h3>
+    <p>Active reporting. Attribute range: 0–65536. Status change reporting. Supports query.</p>
+
+    <h3>Deep Sleep Duration (deepSleepDuration)</h3>
+    <p>Active reporting. Attribute range: 0–65536. Status change reporting. Supports query.</p>
+
+    <h3>Sleep Score (sleepScore)</h3>
+    <p>Active reporting. Attribute range: 0–65536. Status change reporting. Supports query.</p>
+
+    <h3>In/Out of Bed Status Reporting Frequency (getIntoBedReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Sleep Status Reporting Frequency (sleepStatusReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Awake Duration Reporting Frequency (awakeDurationReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Light Sleep Duration Reporting Frequency (lightSleepDurationReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Deep Sleep Duration Reporting Frequency (deepSleepDurationReportFrequency) – Not available</h3>
+    <p>No active reporting. Range: 0–200. Supports query and set.</p>
+
+    <h3>Reporting Mode Selection (reportMode)</h3>
+    <p>Range: 1 (sleep state transmission), 0 (real-time data transmission). Supports query and set.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "reportMode": "?"
+    }
+}
+
+// Set:
+{
+    "version": "1.0",
+    "method": "set",
+    "params": {
+        "reportMode": "1"
+    }
+}</pre>
+
+    <h3>Sleep Comprehensive Status (sleepComprehensiveStatus)</h3>
+    <p>Active reporting. Each report contains 8 integer values, range 0–255. Data meaning: [presence, sleep state, avg respiration, avg heartbeat, turn count, large body movement %, small body movement %, apnea count]. Periodic reporting. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "sleepComprehensiveStatus": [1, 1, 18, 19, 18, 32, 20, 2]
+    }
+}
+
+// Query:
+{
+    "version": "1.0",
+    "method": "get",
+    "params": {
+        "sleepComprehensiveStatus": "?"
+    }
+}</pre>
+
+    <h3>Sleep Quality Analysis (sleepQualityAnalysis)</h3>
+    <p>Active reporting. Each report contains 12 integer values, range 0–255. Data meaning: [sleep quality score, total sleep duration, awake duration %, light sleep %, deep sleep %, time out of bed, times out of bed, turn count, avg respiration, avg heartbeat, apnea count]. Supports query.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "post",
+    "params": {
+        "sleepQualityAnalysis": [1, 2, 52, 35, 24, 32, 32, 69, 16, 36, 86, 32]
+    }
+}</pre>
+
+    <h3>Sleep Abnormality (abnormalSleep)</h3>
+    <p>Active reporting. Data range: 0–255. Supports query.</p>
+
+    <h3>Breathing Mode (breathMode)</h3>
+    <p>No active reporting. Range: 0 (normal mode), 1 (sleep mode). Supports query and set.</p>
+
+    <h2>3. Restricted Functional Attribute Reporting</h2>
+    <p>This function mainly targets frequently reported attributes. Prohibit or allow reporting. Value 1 = prohibit reporting, 0 = allow reporting. Use method <code>limit_set</code> or <code>limit_get</code>. Multiple attributes can be set together.</p>
+    <pre>// Query prohibited attributes:
+{
+    "version": "1.0",
+    "method": "limit_get",
+    "params": {
+        "workDuration": "?",
+        "locationOutOfBounds": "?",
+        "someoneExists": "?",
+        "motionStatus": "?",
+        "movementSigns": "?",
+        "humanDistance": "?",
+        "humanPosition": "?",
+        "heartBeat": "?"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "limit_get",
+    "res": "success",
+    "params": {
+        "workDuration": "0",
+        "locationOutOfBounds": "0",
+        "someoneExists": "0",
+        "motionStatus": "0",
+        "movementSigns": "0",
+        "humanDistance": "0",
+        "humanPosition": "0"
+    }
+}
+
+// Set prohibited attributes:
+{
+    "version": "1.0",
+    "method": "limit_set",
+    "params": {
+        "workDuration": "1",
+        "locationOutOfBounds": "0",
+        "someoneExists": "0",
+        "motionStatus": "0",
+        "movementSigns": "0",
+        "humanDistance": "0",
+        "humanPosition": "0"
+    }
+}
+
+// Set response:
+{
+    "version": "1.0",
+    "opt": "limit_set",
+    "res": "success",
+    "params": {
+        "workDuration": "1",
+        "locationOutOfBounds": "0",
+        "someoneExists": "0",
+        "motionStatus": "0",
+        "movementSigns": "0",
+        "humanDistance": "0",
+        "humanPosition": "0"
+    }
+}</pre>
+
+    <h2>4. Setting QoS Quality of Service</h2>
+    <p>Set publishing quality of service. Range: 0 (at most once), 1 (at least once).</p>
+    <pre>// Set QoS:
+{
+    "version": "1.0",
+    "method": "qos_set",
+    "params": {
+        "Qos post": "0"
+    }
+}
+
+// Response:
+{
+    "version": "1.0",
+    "opt": "qos_set",
+    "res": "success",
+    "params": {
+        "Qos post": "0"
+    }
+}
+
+// Query QoS:
+{
+    "version": "1.0",
+    "method": "qos_get",
+    "params": {
+        "Qos post": "?"
+    }
+}
+
+// Query response:
+{
+    "version": "1.0",
+    "opt": "qos_get",
+    "res": "success",
+    "params": {
+        "Qos post": "0"
+    }
+}</pre>
+
+    <h2>5. OTA Upgrade</h2>
+
+    <h3>Upgrade Module (otaModule)</h3>
+    <p>This attribute requires sending a command to distinguish which module to upgrade. 0 = WiFi module, 1 = radar module, default 0. Send this control command before each OTA upgrade.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "ota set",
+    "params": {
+        "module": "0"
+    }
+}</pre>
+
+    <h3>Upgrade Information (otaInform)</h3>
+    <p>Sends upgrade information including firmware address and port number. The device receives this data, obtains the upgrade firmware from the specified URL and port, then starts upgrading. Returns failure on failure; on success, module restarts and reports the upgraded version number. Customer needs to build a web server.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "ota set",
+    "params": {
+        "otaInform": {
+            "firmwareUrl": "http://192.168.31.88/app.rbl",
+            "port": "8090"
+        }
+    }
+}
+
+// Failure response:
+{
+    "version": "1.0",
+    "opt": "otaInform",
+    "res": "fail",
+    "msg": "ota failed!"
+}</pre>
+
+    <h3>Upgrade Progress (downloadProgress)</h3>
+    <p>Actively reports upgrade progress during upgrade, data range 0–100.</p>
+    <pre>{
+    "version": "1.0",
+    "method": "ota_post",
+    "params": {
+        "downloadProgress": "0"
+    }
+}</pre>
+
+    <h2>Historical Version Update Notes</h2>
+    <table>
+        <thead>
+            <tr><th>Version</th><th>Release Date</th><th>Summary</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>V1.0</td><td>–</td><td>Initial version</td></tr>
+            <tr><td>V1.2</td><td>2022/3/30</td><td>1. Changed restricted function attribute reporting, added query function<br>2. Changed QoS reporting protocol format and added query function</td></tr>
+            <tr><td>V1.3</td><td>2022/5/24</td><td>Added WiFi module OTA function</td></tr>
+            <tr><td>V1.4</td><td>2022/5/29</td><td>Added radar OTA function</td></tr>
+            <tr><td>V1.5</td><td>2022/8/1</td><td>1. Added human presence query<br>2. Added sleep comprehensive status, sleep quality, sleep abnormality, and reporting mode functions</td></tr>
+            <tr><td>V1.6</td><td>2022/8/30</td><td>1. Added motion status, human distance, human position query functions<br>2. Added initialization complete reporting and query function<br>3. Added WiFi version query function<br>4. Sleep abnormality added content 0x03 (none)<br>5. Reporting mode query function<br>6. Added sleep status</td></tr>
+            <tr><td>V1.7</td><td>2022/12/4</td><td>1. Added heartbeat reporting and restriction<br>2. Added breathing mode function</td></tr>
+            <tr><td>V1.8</td><td>2023/11/8</td><td>1. Corrected breathing value DP function point name</td></tr>
+            <tr><td>V1.9</td><td>2023/12/4</td><td>1. Marked unused function points as "Not available"</td></tr>
+            <tr><td>V2.0</td><td>2024/8/8</td><td>1. Corrected heart rate value range display error; correct range is 60–120</td></tr>
+            <tr><td>V2.1</td><td>2024/8/27</td><td>1. Marked radar ID, product model as "Not available" temporarily</td></tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>End of Document – 60G Breathing Sleep Radar WiFi Communication Manual V2.1 (Complete Translation)</p>
+    </div>
+</div>
+</body>
+</html>

@@ -18,3 +18,6 @@ I also provide an Android version of the radar configuration app. If you need it
 Users who are unable to use the WeChat mini-program "Guan Hu Bao" can download it from my GitHub: https://github.com/249263431/Android_BK_BLE_WIFI_NEW_2024031901/blob/main/BK_BLE5.apk
 
 For specific operation instructions, please refer to: https://github.com/249263431/60GHz-Radar-SDK/blob/main/mmWave%20Radar%20Wi-Fi%20Provisioning%20Guide.docx
+
+
+During network configuration, please make sure to connect to the 2.4G Wi-Fi band. The 5.8G (5G) band cannot complete network configuration. Important: Please double-check your Wi-Fi band before proceeding, as connecting to the wrong band will cause the setup to fail.

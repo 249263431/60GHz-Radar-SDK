@@ -192,7 +192,7 @@ The device supports local language learning for custom voice commands.
 
 ## Documentation
 
-- [Wi-Fi Provisioning Guide](/2026/05/07/wifi-provisioning-tips.html)
+- - [Wi-Fi Provisioning Guide]({{ site.baseurl }}/guide/2026/05/07/wifi-provisioning-tips.html).
 - [Installation Guide](#installation-notes)
 - [Communication Protocols](#communication-protocols)
 - [Voice Commands](#voice-commands)

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: 60GHz mmWave Radar SDK
 description: 60GHz mmWave radar SDK for fall detection, sleep monitoring, and presence detection. Wi-Fi + MQTT, Home Assistant compatible, with UART protocol and voice command reference.
 keywords: 60GHz radar, mmWave radar, fall detection, sleep monitoring, presence detection, Wi-Fi, MQTT, Home Assistant, UART
@@ -14,7 +13,7 @@ keywords: 60GHz radar, mmWave radar, fall detection, sleep monitoring, presence 
 <ul>
 {% for post in site.posts %}
   <li>
-    <a href="{{ post.url }}">{{ post.title }}</a>
+    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
     <small>{{ post.date | date: "%Y-%m-%d" }}</small>
   </li>
 {% endfor %}
@@ -192,7 +191,7 @@ The device supports local language learning for custom voice commands.
 
 ## Documentation
 
-- - [Wi-Fi Provisioning Guide]({{ site.baseurl }}/guide/2026/05/07/wifi-provisioning-tips.html).
+- [Wi-Fi Provisioning Guide]({{ site.baseurl }}/guide/2026/05/07/wifi-provisioning-tips.html)
 - [Installation Guide](#installation-notes)
 - [Communication Protocols](#communication-protocols)
 - [Voice Commands](#voice-commands)

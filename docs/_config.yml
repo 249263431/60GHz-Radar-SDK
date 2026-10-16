@@ -1,8 +1,3 @@
 title: 60GHz mmWave Radar SDK
-description: SDK and documentation for 60GHz mmWave radar sensors. Supports fall detection, sleep monitoring, and presence detection.
+description: SDK and documentation for 60GHz mmWave radar sensors.
 theme: jekyll-theme-minimal
-
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-seo-tag

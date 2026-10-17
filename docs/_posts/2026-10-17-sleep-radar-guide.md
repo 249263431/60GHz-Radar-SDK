@@ -48,7 +48,7 @@ Neither measures who the person is, and neither records images, video, or audio.
 
 The radar transmits a 60 GHz FMCW signal and analyses the echo. Breathing moves the chest wall by less than one millimeter, and the 60 GHz band resolves displacements of that scale. A blanket is a non-metallic material, so the signal passes through it and reflects off the chest underneath.
 
-The beam covers a horizontal angle of **40°** and a vertical angle of **40°**, so the radar must be aimed at the chest area rather than at the whole room. A full explanation of the FMCW principle is in the companion article [How mmWave Radar Works]({% post_url 2026-10-17-how-mmwave-radar-works | prepend: site.baseurl %}).
+The beam covers a horizontal angle of **40°** and a vertical angle of **40°**, so the radar must be aimed at the chest area rather than at the whole room. A full explanation of the FMCW principle is in the companion article <a href="{{ site.baseurl }}{% post_url 2026-10-17-how-mmwave-radar-works %}">How mmWave Radar Works</a>.
 
 ## What It Measures
 

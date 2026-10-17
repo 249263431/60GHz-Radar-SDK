@@ -191,10 +191,22 @@ The device supports local language learning for custom voice commands.
 
 ## Documentation
 
-- [Sleep Monitoring Radar]({{ site.baseurl }}/product/2026/10/17/sleep-radar-guide.html)
-- [Presence Detection Radar]({{ site.baseurl }}/product/2026/10/17/presence-radar-guide.html)
-- [Fall Detection Radar]({{ site.baseurl }}/product/2026/10/17/fall-radar-guide.html)
-- [Wi-Fi Provisioning Guide]({{ site.baseurl }}/guide/2026/05/07/wifi-provisioning-tips.html)
+### Radar Guides
+
+{% assign guides = site.posts | where_exp: "post", "post.categories contains 'product'" %}
+{% for post in guides %}
+- [{{ post.title }}]({{ site.baseurl }}{{ post.url }})
+{% endfor %}
+
+### Setup and Integration
+
+{% assign setup = site.posts | where_exp: "post", "post.categories contains 'guide' or post.categories contains 'fundamentals'" %}
+{% for post in setup %}
+- [{{ post.title }}]({{ site.baseurl }}{{ post.url }})
+{% endfor %}
+
+### On This Page
+
 - [Installation Guide](#installation-notes)
 - [Communication Protocols](#communication-protocols)
 - [Voice Commands](#voice-commands)

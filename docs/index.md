@@ -193,22 +193,22 @@ The device supports local language learning for custom voice commands.
 
 ### Radar Guides
 
-{% assign guides = site.posts | where_exp: "post", "post.categories contains 'product'" %}
-{% for post in guides %}
-- [{{ post.title }}]({{ site.baseurl }}{{ post.url }})
-{% endfor %}
+<ul>
+{% for post in site.posts %}{% if post.categories contains 'product' %}
+  <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+{% endif %}{% endfor %}
+</ul>
 
 ### Setup and Integration
 
-{% assign setup = site.posts | where_exp: "post", "post.categories contains 'guide' or post.categories contains 'fundamentals' or post.categories contains 'installation'" %}
-{% for post in setup %}
-- [{{ post.title }}]({{ site.baseurl }}{{ post.url }})
-{% endfor %}
+<ul>
+{% for post in site.posts %}{% if post.categories contains 'guide' or post.categories contains 'fundamentals' or post.categories contains 'installation' %}
+  <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+{% endif %}{% endfor %}
+</ul>
 
 ### On This Page
 
 - [Installation Guide](#installation-notes)
 - [Communication Protocols](#communication-protocols)
 - [Voice Commands](#voice-commands)
-
-

@@ -191,7 +191,9 @@ The device supports local language learning for custom voice commands.
 
 ## Documentation
 
+- [Setup Guide: MQTT + Wi-Fi]({{ site.baseurl }}/guide/2026/10/17/radar-setup-guide.html)
 - [Wi-Fi Provisioning Guide]({{ site.baseurl }}/guide/2026/05/07/wifi-provisioning-tips.html)
 - [Installation Guide](#installation-notes)
 - [Communication Protocols](#communication-protocols)
 - [Voice Commands](#voice-commands)
+

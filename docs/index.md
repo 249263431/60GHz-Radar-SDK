@@ -27,7 +27,7 @@ This SDK provides complete documentation and communication protocols for 60GHz m
 - **Fall Detection Radar** – Fall alarm, dwell alarm, and voice call for help
 - **Sleep Radar** – Breathing, heart rate, sleep state, and sleep quality monitoring
 
-The radar uses millimeter wave technology to detect human presence and movement without physical contact. It connects via Wi-Fi to a cloud platform and can be controlled through a mobile app for scene linkage and status reporting.
+The radar uses millimeter wave technology to detect human presence and movement without physical contact. All data is published as JSON over MQTT to your own broker — there is no cloud platform, no app backend, no subscription fee, and no vendor lock-in. Voice prompts and voice command learning run on the device firmware itself.
 
 ## Key Features
 
@@ -60,13 +60,13 @@ The radar uses millimeter wave technology to detect human presence and movement 
 - Local language learning mode
 - Dialect and multi-language support
 
-### App Control
-- Device pairing and network configuration
-- Real-time status monitoring
-- Parameter configuration (installation height, sensitivity, timing)
-- Alarm push notifications
-- History records
-- Voice learning and reset
+### Control and Monitoring
+- Wi-Fi provisioning: device pairing and network configuration with the Android app
+- Real-time status: presence, motion, and body movement published on the report topic
+- Parameter configuration: every attribute supports get and set over MQTT
+- Alarms: fall and dwell events published as they happen; delivery to a phone or dashboard is handled by your own system
+- Event history: state changes are published as they occur and retained by your own broker
+- Voice: call for help, spoken fall confirmation, and command learning all run on the device firmware
 
 ## Communication Protocols
 
@@ -160,14 +160,14 @@ Checksum = (Header + Control + Command + Length + Data) sum, take low 8 bits.
 
 ## Learning Mode
 
-The device supports local language learning for custom voice commands.
+The device supports local language learning for custom voice commands. Learning runs entirely on the device firmware.
 
 1. Wake the device with a help command.
-2. Enter learning mode via voice or app.
+2. Enter learning mode with a voice command.
 3. Follow the device prompts to record custom phrases.
 4. The device confirms "Learning Success" when both inputs match.
 5. Up to three voice commands can be learned.
-6. Use "Voice Reset" in the app or factory reset to restore defaults.
+6. Restore the default commands with a factory reset.
 
 ## Power Supply
 

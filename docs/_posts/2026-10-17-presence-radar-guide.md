@@ -27,6 +27,8 @@ Both share the same sensing principle, so the outputs mean the same thing. The c
 
 The **presence radar module** is the bare sensing core for integrators who embed it in their own product; its output is described under Over UART. The **presence radar** is the finished ceiling-mounted unit that joins your network; its output is described under Over Wi-Fi and MQTT.
 
+Setting up the presence radar, the Wi-Fi variant, is covered step by step in the [setup guide]({% post_url 2026-10-17-radar-setup-guide %}). The module needs no network setup at all.
+
 ## What This Radar Is
 
 The **presence radar** is a 60 GHz millimeter wave sensor in a housing of approximately 29.5 × 73 × 86 mm, designed to be recessed into a ceiling. It is powered over USB at 5 V and covers a radius of about **2.7 m** when ceiling-mounted, with a beam of **100° horizontal** and **80° vertical**. It is built for small to medium rooms: bathrooms, bedrooms, offices, and hotel rooms.

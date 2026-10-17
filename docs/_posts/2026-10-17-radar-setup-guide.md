@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How to Set Up Your mmWave Radar: MQTT and Wi-Fi Configuration"
-date: 2026-10-17 10:00:00 +0800
+date: 2026-10-17 08:00:00 +0800
 categories: [guide]
 tags: [provisioning, mqtt, wifi, setup, 2.4ghz, android]
 ---

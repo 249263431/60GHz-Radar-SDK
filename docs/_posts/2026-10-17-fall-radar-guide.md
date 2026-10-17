@@ -27,6 +27,8 @@ Both share the same sensing principle, so the outputs mean the same thing. The a
 
 The **fall radar module** is the bare sensing core for integrators who embed it in their own product; its output is described under Over UART. The **fall radar** is the finished ceiling-mounted unit that joins your network; its output is described under Over Wi-Fi and MQTT.
 
+Setting up the fall radar, the Wi-Fi variant, is covered step by step in the [setup guide]({% post_url 2026-10-17-radar-setup-guide %}). The module needs no network setup at all.
+
 ## What This Radar Is
 
 The **fall radar** is a 60 GHz millimeter wave sensor in a housing of approximately 87 × 87 × 24 mm, designed to be mounted on a ceiling looking straight down. It is built for small, high-risk spaces: bathrooms, showers, and toilets, where a camera is unacceptable and a call button is often out of reach.

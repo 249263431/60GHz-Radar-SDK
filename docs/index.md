@@ -200,7 +200,7 @@ The device supports local language learning for custom voice commands.
 
 ### Setup and Integration
 
-{% assign setup = site.posts | where_exp: "post", "post.categories contains 'guide' or post.categories contains 'fundamentals'" %}
+{% assign setup = site.posts | where_exp: "post", "post.categories contains 'guide' or post.categories contains 'fundamentals' or post.categories contains 'installation'" %}
 {% for post in setup %}
 - [{{ post.title }}]({{ site.baseurl }}{{ post.url }})
 {% endfor %}
@@ -210,4 +210,5 @@ The device supports local language learning for custom voice commands.
 - [Installation Guide](#installation-notes)
 - [Communication Protocols](#communication-protocols)
 - [Voice Commands](#voice-commands)
+
 

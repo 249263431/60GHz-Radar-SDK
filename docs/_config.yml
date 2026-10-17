@@ -3,3 +3,5 @@ description: SDK and documentation for 60GHz mmWave radar sensors.
 theme: jekyll-theme-minimal
 baseurl: /60GHz-Radar-SDK
 url: https://249263431.github.io
+plugins:
+  - jekyll-sitemap

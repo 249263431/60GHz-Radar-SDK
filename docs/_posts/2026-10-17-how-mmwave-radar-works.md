@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How mmWave Radar Works: From FMCW to Breathing Detection"
-date: 2026-10-17 10:00:00 +0800
+date: 2026-10-17 08:00:00 +0800
 categories: [fundamentals]
 tags: [mmwave radar, fmcw, 60ghz, breathing detection, presence detection, privacy]
 ---

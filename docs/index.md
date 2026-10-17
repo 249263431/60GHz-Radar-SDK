@@ -191,7 +191,9 @@ The device supports local language learning for custom voice commands.
 
 ## Documentation
 
-- [Setup Guide: MQTT + Wi-Fi]({{ site.baseurl }}/guide/2026/10/17/radar-setup-guide.html)
+- [Sleep Monitoring Radar]({{ site.baseurl }}/product/2026/10/17/sleep-radar-guide.html)
+- [Presence Detection Radar]({{ site.baseurl }}/product/2026/10/17/presence-radar-guide.html)
+- [Fall Detection Radar]({{ site.baseurl }}/product/2026/10/17/fall-radar-guide.html)
 - [Wi-Fi Provisioning Guide]({{ site.baseurl }}/guide/2026/05/07/wifi-provisioning-tips.html)
 - [Installation Guide](#installation-notes)
 - [Communication Protocols](#communication-protocols)

@@ -27,7 +27,7 @@ Both share the same sensing principle, so the outputs mean the same thing. The a
 
 The **fall radar module** is the bare sensing core for integrators who embed it in their own product; its output is described under Over UART. The **fall radar** is the finished ceiling-mounted unit that joins your network; its output is described under Over Wi-Fi and MQTT.
 
-Setting up the fall radar, the Wi-Fi variant, is covered step by step in the [setup guide]({% post_url 2026-10-17-radar-setup-guide %}). The module needs no network setup at all.
+Setting up the fall radar, the Wi-Fi variant, is covered step by step in the [setup guide]({% post_url 2026-10-17-radar-setup-guide | prepend: site.baseurl %}). The module needs no network setup at all.
 
 ## What This Radar Is
 

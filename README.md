@@ -1,5 +1,17 @@
+
 # 60GHz-Radar-SDK
 60GHz mmWave radar SDK for fall detection, sleep monitoring, and presence detection. WiFi + MQTT. Works with Home Assistant.
+
+## Documentation
+
+Full documentation, product guides, and setup articles:
+
+**https://249263431.github.io/60GHz-Radar-SDK/**
+
+- Setup guide (MQTT + Wi-Fi configuration)
+- Sleep monitoring radar, presence radar, and fall detection radar guides
+- MQTT topics, UART protocol, installation, and troubleshooting
+
 
 
 

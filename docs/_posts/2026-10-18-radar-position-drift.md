@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Why Does a mmWave Radar''s "Position" Drift? Coordinate Jitter in Elderly Care and Whole-Home Sensing'
-date: 2026-10-18 06:00:00 +0800
+date: 2026-10-18
 categories: [fundamentals]
 tags: [mmwave radar, position drift, coordinate jitter, elderly monitoring, whole-home sensing, angle of arrival, sensor fusion, noise]
 ---
@@ -67,7 +67,7 @@ If you build on top of a radar SDK:
 - **Do not consume the raw single-frame (x, y) coordinate for critical decisions.** Use the SDK's already-fused outputs: posture, zone, trajectory.
 - **Add hysteresis and filtering.** A buffer zone around bed or zone boundaries prevents flip-flopping from tiny drifts.
 - **Prefer the fused results over the bare point.** Our SDK already performs the multi-dimensional fusion; rely on the posture and zone events rather than the raw coordinate.
-- See also: [Sleep radar installation position](https://249263431.github.io/60GHz-Radar-SDK/guide/2026/10/16/sleep-radar-installation-position.html) and [MQTT vs UART architecture](https://249263431.github.io/60GHz-Radar-SDK/fundamentals/2026/10/18/radar-architecture-mqtt-vs-uart.html).
+- See also: [Sleep radar installation position](https://249263431.github.io/60GHz-Radar-SDK/guide/2026/10/16/sleep-radar-installation-position.html) and [MQTT vs UART architecture](https://249263431.github.io/60GHz-Radar-SDK/fundamentals/2026/10/17/radar-architecture-mqtt-vs-uart.html).
 
 ## Wrapping up
 

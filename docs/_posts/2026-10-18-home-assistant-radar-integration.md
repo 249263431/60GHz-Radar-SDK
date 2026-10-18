@@ -98,6 +98,7 @@ You can confirm the link from the broker side: Artemis' console will now show a 
 
 Out of the box, HA does not know what `fallStatus` means. We declare sensors in `configuration.yaml` (in your HA config folder, `~/.homeassistant/configuration.yaml` on Linux).
 
+{% raw %}
 ```yaml
 mqtt:
   sensor:
@@ -121,10 +122,11 @@ mqtt:
           {{ this.state }}
         {% endif %}
 ```
+{% endraw %}
 
 Replace `{DeviceID}` with the number printed on your device.
 
-**Why the `if defined … else this.state` pattern is mandatory here.** The radar does not send every field in every message. Sometimes it publishes `{"params":{"someoneExists":"1"}}`, sometimes `{"params":{"fallStatus":"1"}}`, and often just a couple of fields. If you wrote `{{ value_json.params.fallStatus }}` directly, every message that lacks `fallStatus` would blank the sensor out. The template above keeps the last known value when the field is absent — this is the standard, stable way to handle sparse MQTT payloads.
+**Why the `if defined … else this.state` pattern is mandatory here.** The radar does not send every field in every message. Sometimes it publishes `{"params":{"someoneExists":"1"}}`, sometimes `{"params":{"fallStatus":"1"}}`, and often just a couple of fields. If you wrote `{% raw %}{{ value_json.params.fallStatus }}{% endraw %}` directly, every message that lacks `fallStatus` would blank the sensor out. The template above keeps the last known value when the field is absent — this is the standard, stable way to handle sparse MQTT payloads.
 
 After editing, reload without a full restart:
 

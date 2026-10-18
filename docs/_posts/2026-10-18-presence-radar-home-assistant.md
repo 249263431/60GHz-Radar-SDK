@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Connect Your 60GHz Presence Radar to Home Assistant (Verified Walkthrough)"
+categories: [integration]
+tags: [home assistant, mqtt, integration, presence radar, dashboard]
+---
+
 # Connect Your 60GHz Presence Radar to Home Assistant (Verified Walkthrough)
 
 If you bought our 60GHz presence (human-occupancy) radar and configured it for MQTT, the next step is to get that occupancy, movement, and scene data into a dashboard you can act on. Home Assistant (HA) is the obvious choice: it speaks MQTT natively, runs locally (your data never leaves your home), and is free and open source.

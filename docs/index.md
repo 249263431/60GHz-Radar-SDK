@@ -10,13 +10,24 @@ keywords: 60GHz radar, mmWave radar, fall detection, sleep monitoring, presence 
 
 ## Latest Articles
 
-<ul>
-{% for post in site.posts %}
+<p><a href="{{ '/archive.html' | relative_url }}">Browse all articles by category →</a></p>
+
+<ul class="post-list">
+{% for post in site.posts limit:8 %}
   <li>
-    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-    <small>{{ post.date | date: "%Y-%m-%d" }}</small>
+    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
   </li>
 {% endfor %}
+</ul>
+
+## Browse by Category
+
+<ul class="cat-widget">
+{% assign cats = "fundamentals,product,guide,integration" | split: "," %}
+{% assign names = "Fundamentals,Products,Guides,Integrations" | split: "," %}
+{% for cat in cats %}{% assign n = site.categories[cat].size %}{% if n > 0 %}
+  <li><a href="{{ site.baseurl }}/{{ cat }}/">{{ names[forloop.index0] }} ({{ n }})</a></li>
+{% endif %}{% endfor %}
 </ul>
 
 ## Overview
@@ -191,21 +202,11 @@ The device supports local language learning for custom voice commands. Learning 
 
 ## Documentation
 
-### Radar Guides
-
-<ul>
-{% for post in site.posts %}{% if post.categories contains 'product' %}
-  <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-{% endif %}{% endfor %}
-</ul>
-
-### Setup and Integration
-
-<ul>
-{% for post in site.posts %}{% if post.categories contains 'guide' or post.categories contains 'fundamentals' or post.categories contains 'installation' %}
-  <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-{% endif %}{% endfor %}
-</ul>
+- [Product guides]({{ '/product/' | relative_url }})
+- [Setup & integration guides]({{ '/guide/' | relative_url }})
+- [Home Assistant & integrations]({{ '/integration/' | relative_url }})
+- [Fundamentals & concepts]({{ '/fundamentals/' | relative_url }})
+- [Browse everything by category]({{ '/archive.html' | relative_url }})
 
 ### On This Page
 

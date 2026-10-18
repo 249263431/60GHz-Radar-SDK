@@ -5,13 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <style>
-      :root{
-        --nav:#0f172a; --accent:#0ea5e9; --buy:#f97316;
-        --text:#374151; --heading:#111827; --link:#2563eb;
-        --line:#e5e7eb; --muted:#6b7280;
-      }
+    :root{
+      --nav:#0f172a; --accent:#0ea5e9; --buy:#f97316;
+      --text:#374151; --heading:#111827; --link:#2563eb;
+      --line:#e5e7eb; --muted:#6b7280;
+    }
+    .post-list { list-style:none; margin:0; padding:0; }
+    .post-list li { margin:0 0 16px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+    .post-list a { font-size:18px; font-weight:600; color:var(--link); text-decoration:none; }
+    .post-list a:hover { text-decoration:underline; }
+    .post-date { display:inline-block; margin-left:10px; color:var(--muted); font-size:13px; }
+    .post-list p { margin:6px 0 0; color:var(--text); font-size:15px; }
+    .cat-widget { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 4px; }
+    .cat-widget li a { display:inline-block; padding:6px 12px; border:1px solid var(--line); border-radius:999px; color:var(--link); text-decoration:none; font-size:14px; }
+    .cat-widget li a:hover { background:var(--link); color:#fff; border-color:var(--link); }
       * { box-sizing:border-box; }
       html { scroll-behavior:smooth; overflow-y:scroll; }
       body { margin:0; padding-top:56px; background:#fff; color:var(--text);

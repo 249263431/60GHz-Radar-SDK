@@ -3,6 +3,7 @@ layout: post
 title: "Connect Your 60GHz mmWave Radar to Home Assistant (Verified Walkthrough)"
 date: 2026-10-18 09:00:00 +0800
 tags: [home assistant, mqtt, radar, integration, dashboard, home automation]
+categories: [integration]
 ---
 
 # Connect Your 60GHz mmWave Radar to Home Assistant (Verified Walkthrough)

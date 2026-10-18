@@ -2,7 +2,7 @@
 layout: post
 title: "How to Choose the Best Installation Position for a Sleep Monitoring Radar"
 date: 2026-10-16 10:00:00 +0800
-categories: [installation]
+categories: [guide]
 tags: [sleep radar, installation, breathing, sleep monitoring]
 ---
 

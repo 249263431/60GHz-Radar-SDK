@@ -5,6 +5,7 @@ baseurl: /60GHz-Radar-SDK
 url: https://249263431.github.io
 plugins:
   - jekyll-sitemap
+  - jekyll-feed
 
 nav:
   - title: Home
@@ -18,11 +19,13 @@ nav:
   - title: Setup
     url: /guide/2026/10/17/radar-setup-guide.html
   - title: Assistant
-    url: /2026/10/18/home-assistant-radar-integration.html
+    url: /integration/2026/10/18/home-assistant-radar-integration.html
   - title: Compare
     url: /compare.html
   - title: FAQ
     url: /faq.html
+  - title: Articles
+    url: /archive.html
   - title: Buy on Tindie
     url: https://www.tindie.com/stores/fuxinsuo/
     external: true

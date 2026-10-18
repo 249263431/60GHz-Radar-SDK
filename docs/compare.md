@@ -31,7 +31,7 @@ We offer three 60GHz mmWave radar models for different scenarios. Pick by use ca
 All three connect over **2.4GHz Wi-Fi + MQTT**. Setup and integration:
 
 - [Wi-Fi Provisioning & MQTT Setup Guide]({{ "/guide/2026/10/17/radar-setup-guide.html" | relative_url }})
-- [Home Assistant Integration (Verified)]({{ "/2026/10/18/home-assistant-radar-integration.html" | relative_url }})
+- [Home Assistant Integration (Verified)]({{ "/integration/2026/10/18/home-assistant-radar-integration.html" | relative_url }})
 
 Data stays on your local broker by default — privacy friendly.
 

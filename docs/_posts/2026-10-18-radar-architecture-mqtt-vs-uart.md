@@ -2,7 +2,7 @@
 layout: post
 title: "Two Architectures, Two Protocols: MQTT vs UART on mmWave Radar"
 date: 2026-10-18 06:00:00 +0800
-categories: [guide]
+categories: [fundamentals]
 tags: [architecture, mqtt, uart, protocol, mosquitto]
 ---
 <!-- filename: 2026-10-18-radar-architecture-mqtt-vs-uart.md -->

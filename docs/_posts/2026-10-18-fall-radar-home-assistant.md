@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Connect Your 60GHz Fall Detection Radar to Home Assistant (Verified Walkthrough)"
+categories: [integration]
+tags: [home assistant, mqtt, integration, fall radar, dashboard]
+---
+
 # Connect Your 60GHz Fall Detection Radar to Home Assistant (Verified Walkthrough)
 
 If you bought our 60GHz fall detection radar and configured it for MQTT, the next step is to get that fall alarm and presence data into a dashboard — and, more importantly, into an alert you can actually rely on. Home Assistant (HA) is the obvious choice: it speaks MQTT natively, runs locally (your data never leaves your home), and is free and open source.

@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Connect Your 60GHz Sleep Radar to Home Assistant (Verified Walkthrough)"
+categories: [integration]
+tags: [home assistant, mqtt, integration, sleep radar, dashboard]
+---
+
 # Connect Your 60GHz Sleep Radar to Home Assistant (Verified Walkthrough)
 
 If you bought our 60GHz sleep monitoring radar and configured it for MQTT, the next step is to get that data — breathing rate, heart rate, sleep stage, in-bed status — into a dashboard you can actually watch. Home Assistant (HA) is the obvious choice: it speaks MQTT natively, runs locally (your data never leaves your home), and is free and open source.

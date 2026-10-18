@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sleep Sensing in Wearables: Principles, Vendor Approaches, and Where mmWave Radar Fits"
-date: 2026-10-18 06:00:00 +0800
+date: 2026-10-18 08:00:00 +0800
 categories: [fundamentals]
 tags: [wearables, sleep tracking, mmwave radar, PPG, accelerometer]
 ---

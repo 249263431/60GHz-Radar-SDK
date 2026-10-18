@@ -71,7 +71,7 @@ Two families ship from this store:
 - **Finished 60 GHz radar** — connects over **2.4 GHz Wi-Fi** and reports a **JSON property protocol over MQTT topics**. Configure it from a web page (for MQTT) or the Android app (for Wi-Fi), then read it from any broker (Mosquitto / Artemis). See [Home Assistant Integration (Verified)]({{ "/integration/2026/10/18/home-assistant-radar-integration.html" | relative_url }}).
 - **24 GHz radar module** — a bare sensing core with **UART only**, speaking a binary **frame protocol at 115200 bps, 8N1, 3.3 V TTL**. No Wi-Fi, no account; any serial terminal or USB-TTL adapter talks to it. This is the path for embedding the sensor into your own product.
 
-Full comparison: [Two Architectures, Two Protocols: MQTT vs UART]({{ "/fundamentals/2026/10/18/radar-architecture-mqtt-vs-uart.html" | relative_url }}).
+Full comparison: [Two Architectures, Two Protocols: MQTT vs UART]({{ "/fundamentals/2026/10/17/radar-architecture-mqtt-vs-uart.html" | relative_url }}).
 
 ## Still have questions?
 Leave a message on [our Tindie store](https://www.tindie.com/stores/fuxinsuo/){:target="_blank"} or open a GitHub Issue.

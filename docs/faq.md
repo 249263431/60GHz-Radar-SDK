@@ -17,6 +17,20 @@ The radar only outputs point-cloud-level info like distance, speed, and presence
 ## Must it use 2.4GHz Wi-Fi?
 Yes. Provisioning uses **2.4GHz Wi-Fi** only, not 5GHz. Make sure your router has the 2.4G band enabled (many dual-band routers merge bands by default and need to be split in settings).
 
+## How do I connect the radar to Wi-Fi (provisioning)?
+
+Two short setups, both done once and stored in the module:
+
+1. **Set the MQTT broker** — press the button for **10 s**, join the `RadarConfig` Wi-Fi hotspot, open `192.168.0.1`, and enter your broker address, port, ClientID, username, and password. (The Android app has no MQTT fields, so this must be done on the hotspot page.)
+2. **Send the Wi-Fi credentials** — install `BK_BLE5.apk` (Android only; there is no iOS app), press the button for **5 s** until the LED flashes, then in the app grant location permission and send your **2.4 GHz** Wi-Fi SSID and password over Bluetooth.
+
+Gotchas:
+- **2.4 GHz only** — 5 GHz / 5.8 GHz cannot be used. If your router merges bands, split them or use a separate 2.4 GHz network.
+- **90-second timeout** — if provisioning does not finish in time, hold the button again to retry.
+- The app is **Android-only**; the WeChat mini-program used in China is not available outside China, so use the Android app.
+
+Full walkthrough with screenshots and a troubleshooting table: [Wi-Fi Provisioning & MQTT Setup Guide]({{ "/guide/2026/10/17/radar-setup-guide.html" | relative_url }}).
+
 ## How do I choose the voice / alarm language?
 The firmware supports Chinese / English voice prompts; switch in the companion app or a config item. See each product guide.
 

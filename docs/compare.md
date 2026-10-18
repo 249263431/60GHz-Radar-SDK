@@ -1,40 +1,40 @@
 ---
 layout: default
-title: 该买哪款 60GHz 雷达？
+title: Which 60GHz Radar Should I Buy?
 ---
 
-# 该买哪款 60GHz 雷达？
+# Which 60GHz Radar Should I Buy?
 
-我们提供三款 60GHz 毫米波雷达，面向不同场景。先看用途，再下单不踩坑。
+We offer three 60GHz mmWave radar models for different scenarios. Pick by use case so you don't order the wrong one.
 
-| 雷达 | 主要用途 | 核心能力 | 典型场景 | 适合谁 |
-|------|----------|----------|----------|--------|
-| **跌倒检测雷达** | 老人 / 卫生间跌倒报警 | 跌倒报警、驻留报警(dwell alarm)、本地语音呼救 | 浴室、卧室、养老 / 独居 | 照护家人、养老机构 |
-| **睡眠监测雷达** | 睡眠质量量化 | 呼吸 / 心率、睡眠阶段、离床 / 在床 | 卧室床头 | 关注睡眠健康者 |
-| **人体存在雷达** | 区域占用与存在感应 | 存在感应、区域划分、场景模式、灵敏度调节 | 书房、会议室、走廊（人来灯亮） | 全屋智能 / 节能 |
+| Radar | Primary use | Core capabilities | Typical scenes | Who it's for |
+|-------|-------------|-------------------|----------------|--------------|
+| **Fall Detection Radar** | Elderly / bathroom fall alerts | Fall alarm, dwell alarm, local voice call | Bathroom, bedroom, elder care / living alone | Families caring for seniors, care homes |
+| **Sleep Monitoring Radar** | Sleep quality tracking | Breathing / heart rate, sleep stages, in-bed / out-of-bed | Bedside in bedroom | Anyone focused on sleep health |
+| **Presence Detection Radar** | Area occupancy & presence | Presence sensing, zone division, scene modes, sensitivity tuning | Study, meeting room, hallway (lights on when someone enters) | Smart-home / energy saving |
 
-## 怎么选
+## How to choose
 
-- **怕家人洗澡跌倒** → 跌倒检测雷达（支持本地语音报警，不依赖云端）
-- **想看自己睡得好不好** → 睡眠监测雷达
-- **想做"人在灯亮 / 人来灯亮" occupancy 自动化** → 人体存在雷达
-- **三样都要** → 分别购买，全部走同一套 MQTT / Home Assistant 接入，配置互通
+- **Worried a family member may fall in the shower** → Fall Detection Radar (local voice alarm, no cloud needed)
+- **Want to see how well you sleep** → Sleep Monitoring Radar
+- **Want "lights on when someone's there" / occupancy automation** → Presence Detection Radar
+- **Need all three** → Buy separately; all share the same MQTT / Home Assistant pipeline, and configs are interchangeable
 
-## 三款详细指南
+## Detailed guides
 
-- [跌倒检测雷达指南]({{ "/product/2026/10/17/fall-radar-guide.html" | relative_url }})
-- [睡眠监测雷达指南]({{ "/product/2026/10/17/sleep-radar-guide.html" | relative_url }})
-- [人体存在雷达指南]({{ "/product/2026/10/17/presence-radar-guide.html" | relative_url }})
+- [Fall Detection Radar Guide]({{ "/product/2026/10/17/fall-radar-guide.html" | relative_url }})
+- [Sleep Monitoring Radar Guide]({{ "/product/2026/10/17/sleep-radar-guide.html" | relative_url }})
+- [Presence Detection Radar Guide]({{ "/product/2026/10/17/presence-radar-guide.html" | relative_url }})
 
-## 共同前提
+## Common prerequisites
 
-三款都通过 **2.4GHz Wi-Fi + MQTT** 接入。配置与接入方法见：
+All three connect over **2.4GHz Wi-Fi + MQTT**. Setup and integration:
 
-- [配网与 MQTT 设置指南]({{ "/guide/2026/10/17/radar-setup-guide.html" | relative_url }})
-- [Home Assistant 接入（已验证）]({{ "/2026/10/18/home-assistant-radar-integration.html" | relative_url }})
+- [Wi-Fi Provisioning & MQTT Setup Guide]({{ "/guide/2026/10/17/radar-setup-guide.html" | relative_url }})
+- [Home Assistant Integration (Verified)]({{ "/2026/10/18/home-assistant-radar-integration.html" | relative_url }})
 
-数据默认留在本地 broker，隐私友好。
+Data stays on your local broker by default — privacy friendly.
 
-## 购买
+## Buy
 
-👉 [在 Tindie 商店查看 / 下单](https://www.tindie.com/stores/fuxinsuo/){:target="_blank"}
+👉 [View / order on Tindie](https://www.tindie.com/stores/fuxinsuo/){:target="_blank"}

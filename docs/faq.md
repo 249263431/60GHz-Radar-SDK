@@ -58,9 +58,9 @@ All three finished 60 GHz units join your network over **2.4 GHz Wi-Fi + MQTT**.
 
 | Product | Housing size | Power | Wireless | Typical mounting |
 |---|---|---|---|---|
-| Fall Detection Radar | 87 × 87 × 24 mm | 5 V DC | 2.4 GHz Wi-Fi + MQTT | Ceiling, face down, ≤ 2.8 m |
-| Presence Radar | 29.5 × 73 × 86 mm | 5 V over USB | 2.4 GHz Wi-Fi + MQTT | Recessed in ceiling; module ≤ 2.75 m |
-| Sleep Radar | 80 × 80 × 51.8 mm | 4.5–5.5 V (≈5 V) | 2.4 GHz Wi-Fi + MQTT | Bedside: side-wall 1.8–2.2 m, or above bed head tilted 30°–45° down |
+| Fall Detection Radar | 87 × 87 × 24 mm | USB Type-C: 5V/1A | 2.4 GHz Wi-Fi + MQTT | Ceiling, face down, ≤ 2.8 m |
+| Presence Radar | 29.5 × 73 × 86 mm | USB Type-C: 5V/1A | 2.4 GHz Wi-Fi + MQTT | Recessed in ceiling; module ≤ 2.75 m |
+| Sleep Radar | 80 × 80 × 51.8 mm | USB Type-C: 5V/1A | 2.4 GHz Wi-Fi + MQTT | Bedside: side-wall 1.8–2.2 m, or above bed head tilted 30°–45° down |
 
 Each product guide has its own `## Specifications` table with the full parameter list (beam angle, current, detection range, etc.). Mounting detail: [Sleep Radar Mounting Position]({{ "/installation/2026/10/16/sleep-radar-installation-position.html" | relative_url }}).
 

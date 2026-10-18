@@ -14,12 +14,12 @@
       }
       * { box-sizing:border-box; }
       html { scroll-behavior:smooth; overflow-y:scroll; }
-      body { margin:0; background:#fff; color:var(--text);
+      body { margin:0; padding-top:48px; background:#fff; color:var(--text);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
         font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased; }
 
-      /* ===== Top nav: sticky on top + responsive hamburger on mobile ===== */
-      .site-nav { background:var(--nav); position:sticky; top:0; z-index:100;
+      /* ===== Top nav: fixed to viewport top + responsive hamburger on mobile ===== */
+      .site-nav { background:var(--nav); position:fixed; top:0; left:0; right:0; z-index:100;
         border-bottom:1px solid rgba(255,255,255,.06); box-shadow:0 1px 6px rgba(0,0,0,.18); }
       .site-nav .bar { max-width:1080px; margin:0 auto; padding:0 20px;
         display:flex; align-items:center; flex-wrap:wrap; gap:14px; }

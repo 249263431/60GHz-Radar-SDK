@@ -1,9 +1,11 @@
 ---
-layout: default
+layout: post
 title: "Sleep Sensing in Wearables: Principles, Vendor Approaches, and Where mmWave Radar Fits"
-date: 2026-10-18
-categories: [wearables, sleep, radar]
+date: 2026-10-18 06:00:00 +0800
+categories: [fundamentals]
+tags: [wearables, sleep tracking, mmwave radar, PPG, accelerometer]
 ---
+<!-- filename: 2026-10-18-sleep-sensing-wearables.md -->
 
 Sleep tracking has quietly become a baseline feature across modern wearables. But how do these devices actually know you're asleep — and how accurate is that claim? This article walks through the three measurement principles behind consumer sleep sensing, how the major vendors implement them, the problems that still aren't solved, and where mmWave radar offers a fundamentally different angle.
 

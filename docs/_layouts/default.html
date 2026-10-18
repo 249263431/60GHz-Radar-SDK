@@ -19,7 +19,7 @@
         font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased; }
 
       /* ===== Top nav: fixed to viewport top + responsive hamburger on mobile ===== */
-      .site-nav { background:var(--nav); position:fixed; top:0; left:0; right:0; z-index:100;
+      .site-nav { background:var(--nav); position:fixed !important; top:0 !important; left:0 !important; right:0 !important; z-index:100;
         border-bottom:1px solid rgba(255,255,255,.06); box-shadow:0 1px 6px rgba(0,0,0,.18); }
       .site-nav .bar { max-width:1080px; margin:0 auto; padding:0 20px;
         display:flex; align-items:center; flex-wrap:nowrap; gap:14px; }
@@ -34,6 +34,28 @@
       .site-nav a.item:hover { color:#fff; background:rgba(255,255,255,.07); }
       .site-nav a.buy { background:var(--buy); color:#fff; font-weight:700; border-radius:6px; margin-left:8px; padding:9px 15px; white-space:nowrap; transition:background .15s; }
       .site-nav a.buy:hover { background:#fb923c; }
+      .site-nav .nav-search { position:relative; display:flex; align-items:center; }
+      .site-nav .nav-search input {
+        width:150px; height:34px; padding:0 10px; border-radius:6px;
+        border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06);
+        color:#e2e8f0; font-size:13px; outline:none;
+      }
+      .site-nav .nav-search input::placeholder { color:#94a3b8; }
+      .site-nav .nav-search input:focus { border-color:var(--accent); background:rgba(255,255,255,.1); }
+      .site-nav .nav-search ul#search-results {
+        position:absolute; top:42px; right:0; width:300px; max-height:60vh; overflow:auto;
+        margin:0; padding:6px; list-style:none; z-index:200; display:block;
+        background:#0b1220; border:1px solid rgba(255,255,255,.12); border-radius:8px;
+        box-shadow:0 8px 24px rgba(0,0,0,.45);
+      }
+      .site-nav .nav-search ul#search-results:empty { display:none; }
+      .site-nav .nav-search ul#search-results li a {
+        display:block; padding:8px 10px; color:#e2e8f0; text-decoration:none;
+        border-radius:6px; font-size:13px; line-height:1.35;
+      }
+      .site-nav .nav-search ul#search-results li a:hover { background:rgba(255,255,255,.08); }
+      .site-nav .nav-search ul#search-results li a .snippet { display:block; color:#94a3b8; font-size:11px; margin-top:3px; }
+      .site-nav .nav-search ul#search-results li.nr { padding:8px 10px; color:#94a3b8; font-size:13px; }
 
       /* ===== Mobile: collapse links into a toggle menu ===== */
       @media (max-width:900px){
@@ -48,6 +70,9 @@
         .site-nav .nav-menu ul{ flex-direction:column; align-items:stretch; gap:0; }
         .site-nav a.item{ text-align:center; padding:13px; border-radius:0; }
         .site-nav a.buy{ margin:10px 14px 2px; text-align:center; }
+        .site-nav .nav-search{ flex-basis:100%; }
+        .site-nav .nav-search input{ width:100%; }
+        .site-nav .nav-search ul#search-results{ position:static; width:auto; max-height:none; overflow:visible; box-shadow:none; border:none; background:transparent; padding:0; }
       }
       @media (max-width:560px){
         .page{ padding:32px 16px 56px; }
@@ -99,6 +124,10 @@
           {% for item in site.nav %}{% if item.buy %}
             <a class="buy" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a>
           {% endif %}{% endfor %}
+        <form class="nav-search" role="search" onsubmit="return false">
+          <input id="search-input" type="search" placeholder="Search…" aria-label="Search articles">
+          <ul id="search-results"></ul>
+        </form>
         </div>
       </div>
     </nav>
@@ -133,6 +162,31 @@
         window.addEventListener('resize', syncIfClosed);
         window.addEventListener('load', syncIfClosed);
         if (document.fonts && document.fonts.ready) { document.fonts.ready.then(syncIfClosed); }
+      })();
+    </script>
+    <script>
+      (function () {
+        var input = document.getElementById('search-input');
+        var results = document.getElementById('search-results');
+        if (!input || !results) return;
+        var form = input.closest('form');
+        var data = null;
+        function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        function render(q) {
+          q = (q || '').trim().toLowerCase();
+          if (!q) { results.innerHTML = ''; return; }
+          var hits = data.filter(function (d) {
+            return (d.title + ' ' + d.content).toLowerCase().indexOf(q) !== -1;
+          }).slice(0, 10);
+          if (!hits.length) { results.innerHTML = '<li class="nr">No results</li>'; return; }
+          results.innerHTML = hits.map(function (h) {
+            return '<li><a href="' + esc(h.url) + '">' + esc(h.title) + '<span class="snippet">' + esc(h.content) + '</span></a></li>';
+          }).join('');
+        }
+        fetch('{{ '/search.json' | relative_url }}').then(function (r) { return r.json(); }).then(function (j) { data = j; }).catch(function () {});
+        input.addEventListener('input', function () { render(input.value); });
+        input.addEventListener('focus', function () { if (input.value.trim()) render(input.value); });
+        document.addEventListener('click', function (e) { if (form && !form.contains(e.target)) results.innerHTML = ''; });
       })();
     </script>
   </body>

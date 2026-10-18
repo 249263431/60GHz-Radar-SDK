@@ -70,7 +70,7 @@
         .site-nav .nav-menu ul{ flex-direction:column; align-items:stretch; gap:0; }
         .site-nav a.item{ text-align:center; padding:13px; border-radius:0; }
         .site-nav a.buy{ margin:10px 14px 2px; text-align:center; }
-        .site-nav .nav-search{ flex-basis:100%; }
+        .site-nav .nav-search{ width:100%; }
         .site-nav .nav-search input{ width:100%; }
         .site-nav .nav-search ul#search-results{ position:static; width:auto; max-height:none; overflow:visible; box-shadow:none; border:none; background:transparent; padding:0; }
       }
@@ -115,10 +115,6 @@
         <a class="brand" href="{{ '/' | relative_url }}"><span class="dot"></span>{{ site.title }}</a>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
         <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">&#9776;</label>
-        <form class="nav-search" role="search" onsubmit="return false">
-          <input id="search-input" type="search" placeholder="Search…" aria-label="Search articles">
-          <ul id="search-results"></ul>
-        </form>
         <div class="nav-menu">
           <ul>
             {% for item in site.nav %}{% unless item.buy %}
@@ -128,6 +124,10 @@
           {% for item in site.nav %}{% if item.buy %}
             <a class="buy" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a>
           {% endif %}{% endfor %}
+        <form class="nav-search" role="search" onsubmit="return false">
+          <input id="search-input" type="search" placeholder="Search…" aria-label="Search articles">
+          <ul id="search-results"></ul>
+        </form>
         </div>
       </div>
     </nav>

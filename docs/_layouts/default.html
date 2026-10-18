@@ -18,30 +18,39 @@
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
         font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased; }
 
-      /* ===== Top nav (consistent on every page) ===== */
-      .site-nav { background:var(--nav); position:sticky; top:0; z-index:50; border-bottom:1px solid rgba(255,255,255,.06); }
-      .site-nav .bar { max-width:1000px; margin:0 auto; padding:0 20px;
-        display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+      /* ===== Top nav: sticky on top + responsive hamburger on mobile ===== */
+      .site-nav { background:var(--nav); position:sticky; top:0; z-index:100;
+        border-bottom:1px solid rgba(255,255,255,.06); box-shadow:0 1px 6px rgba(0,0,0,.18); }
+      .site-nav .bar { max-width:1080px; margin:0 auto; padding:0 20px;
+        display:flex; align-items:center; flex-wrap:wrap; gap:14px; }
       .site-nav .brand { color:#fff; font-weight:700; font-size:15px; letter-spacing:.3px;
         text-decoration:none; padding:13px 4px; white-space:nowrap; display:flex; align-items:center; }
       .site-nav .brand .dot { width:9px; height:9px; border-radius:50%; background:var(--accent); margin-right:9px; box-shadow:0 0 8px var(--accent); }
       .site-nav .brand:hover { color:#e2e8f0; }
-      .site-nav .nav-right { display:flex; align-items:center; gap:6px; flex:1 1 auto; justify-content:flex-end; min-width:0; }
-      .site-nav ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:2px; }
+      .site-nav .nav-toggle, .site-nav .nav-burger { display:none; }
+      .site-nav .nav-menu { display:flex; align-items:center; gap:6px; margin-left:auto; }
+      .site-nav .nav-menu ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:2px; }
       .site-nav a.item { display:block; color:#cbd5e1; text-decoration:none; padding:13px 10px; font-size:14px; white-space:nowrap; transition:color .15s, background .15s; }
       .site-nav a.item:hover { color:#fff; background:rgba(255,255,255,.07); }
       .site-nav a.buy { background:var(--buy); color:#fff; font-weight:700; border-radius:6px; margin-left:8px; padding:9px 15px; white-space:nowrap; transition:background .15s; }
       .site-nav a.buy:hover { background:#fb923c; }
+
+      /* ===== Mobile: collapse links into a toggle menu ===== */
       @media (max-width:760px){
-        .site-nav .bar{ padding:0 12px; }
-        .site-nav .nav-right{ flex-basis:100%; justify-content:flex-start; flex-wrap:wrap; }
-        .site-nav ul{ justify-content:flex-start; }
+        .site-nav .bar{ padding:0 14px; }
+        .site-nav .nav-burger{ display:flex; align-items:center; justify-content:center;
+          margin-left:auto; width:42px; height:42px; cursor:pointer;
+          color:#e2e8f0; font-size:22px; line-height:1; border-radius:8px; }
+        .site-nav .nav-burger:hover{ background:rgba(255,255,255,.08); }
+        .site-nav .nav-menu{ display:none; flex-basis:100%; flex-direction:column; align-items:stretch;
+          gap:0; margin-left:0; padding:6px 0 10px; border-top:1px solid rgba(255,255,255,.08); }
+        .site-nav .nav-toggle:checked ~ .nav-menu{ display:flex; }
+        .site-nav .nav-menu ul{ flex-direction:column; align-items:stretch; gap:0; }
+        .site-nav a.item{ text-align:center; padding:13px; border-radius:0; }
+        .site-nav a.buy{ margin:10px 14px 2px; text-align:center; }
       }
       @media (max-width:560px){
-        .site-nav .nav-right{ flex-direction:column; align-items:stretch; gap:0; }
-        .site-nav ul{ flex-direction:column; align-items:stretch; }
-        .site-nav a.item{ text-align:center; padding:12px; }
-        .site-nav a.buy{ margin:8px 0 6px; text-align:center; }
+        .page{ padding:32px 16px 56px; }
       }
 
       /* ===== Reading column (blog style, same on all pages) ===== */
@@ -79,7 +88,9 @@
     <nav class="site-nav">
       <div class="bar">
         <a class="brand" href="{{ '/' | relative_url }}"><span class="dot"></span>{{ site.title }}</a>
-        <div class="nav-right">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
+        <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">&#9776;</label>
+        <div class="nav-menu">
           <ul>
             {% for item in site.nav %}{% unless item.buy %}
               <li><a class="item" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a></li>

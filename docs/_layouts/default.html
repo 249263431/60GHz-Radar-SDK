@@ -14,7 +14,7 @@
       }
       * { box-sizing:border-box; }
       html { scroll-behavior:smooth; overflow-y:scroll; }
-      body { margin:0; padding-top:48px; background:#fff; color:var(--text);
+      body { margin:0; padding-top:56px; background:#fff; color:var(--text);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
         font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased; }
 
@@ -118,5 +118,22 @@
     </footer>
 
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
+    <script>
+      (function () {
+        var nav = document.querySelector('.site-nav');
+        if (!nav) return;
+        function sync() {
+          document.body.style.paddingTop = (nav.getBoundingClientRect().height + 4) + 'px';
+        }
+        function syncIfClosed() {
+          var t = document.getElementById('nav-toggle');
+          if (!t || !t.checked) sync();
+        }
+        syncIfClosed();
+        window.addEventListener('resize', syncIfClosed);
+        window.addEventListener('load', syncIfClosed);
+        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(syncIfClosed); }
+      })();
+    </script>
   </body>
 </html>

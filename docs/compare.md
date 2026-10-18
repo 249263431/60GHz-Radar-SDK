@@ -35,6 +35,15 @@ All three connect over **2.4GHz Wi-Fi + MQTT**. Setup and integration:
 
 Data stays on your local broker by default — privacy friendly.
 
+## Provisioning: how to connect to Wi-Fi
+
+Two quick setups, both done once and stored in the module:
+
+1. **Set the MQTT broker** — hold the button for **10 s**, join the `RadarConfig` hotspot, open `192.168.0.1`, and enter your broker address, port, ClientID, username, and password.
+2. **Send the Wi-Fi credentials** — install `BK_BLE5.apk` (Android only), hold the button for **5 s** until the LED flashes, then grant location permission in the app and send your **2.4 GHz** Wi-Fi SSID and password over Bluetooth.
+
+Notes: 2.4 GHz only (no 5/5.8 GHz); **90-second** timeout; the app is **Android-only**. Full walkthrough with screenshots and a troubleshooting table: [Wi-Fi Provisioning & MQTT Setup Guide]({{ "/guide/2026/10/17/radar-setup-guide.html" | relative_url }}).
+
 ## Buy
 
 👉 [View / order on Tindie](https://www.tindie.com/stores/fuxinsuo/){:target="_blank"}

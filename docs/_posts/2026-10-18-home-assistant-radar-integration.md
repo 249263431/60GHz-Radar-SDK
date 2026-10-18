@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Connect Your 60GHz mmWave Radar to Home Assistant (Verified Walkthrough)"
+date: 2026-10-18 09:00:00 +0800
+tags: [home assistant, mqtt, radar, integration, dashboard, home automation]
+---
+
 # Connect Your 60GHz mmWave Radar to Home Assistant (Verified Walkthrough)
 
 If you bought one of our 60GHz mmWave radars — fall detection, presence, or sleep monitoring — and configured it for MQTT, the next natural step is to get that data into a dashboard you can actually see. Home Assistant (HA) is the obvious choice: it speaks MQTT natively, runs locally (your data never leaves your home), and is free and open source.

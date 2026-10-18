@@ -7,32 +7,69 @@
     <title>{{ page.title | default: site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <style>
-      .site-nav { background:#2e2e2e; text-align:center; }
-      .site-nav ul { list-style:none; margin:0 auto; padding:0; display:inline-flex; flex-wrap:wrap; max-width:980px; }
-      .site-nav li { margin:0; }
-      .site-nav a { display:block; color:#fff; text-decoration:none; padding:10px 14px; font-size:14px; white-space:nowrap; }
-      .site-nav a:hover { background:#444; }
-      .site-nav a.buy { background:#b6332e; font-weight:bold; }
-      .site-nav a.buy:hover { background:#d33; }
-      @media (max-width:600px){ .site-nav ul{ flex-direction:column; } }
+      /* ---- Top navigation ---- */
+      .site-nav {
+        background:#1f2937;
+        position:sticky; top:0; z-index:50;
+        box-shadow:0 2px 6px rgba(0,0,0,.25);
+      }
+      .site-nav .bar {
+        max-width:1000px; margin:0 auto; padding:0 16px;
+        display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      }
+      .site-nav .brand {
+        color:#fff; font-weight:700; font-size:15px; text-decoration:none;
+        padding:12px 4px; white-space:nowrap;
+      }
+      .site-nav .brand:hover { color:#9fd3ff; }
+      .site-nav ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; }
+      .site-nav a.item {
+        display:block; color:#cbd5e1; text-decoration:none;
+        padding:13px 13px; font-size:14px; white-space:nowrap;
+      }
+      .site-nav a.item:hover { color:#fff; background:rgba(255,255,255,.08); }
+      .site-nav a.buy {
+        background:#c0392b; color:#fff; font-weight:700; border-radius:5px;
+        margin:7px 0 7px 8px; padding:7px 14px;
+      }
+      .site-nav a.buy:hover { background:#e74c3c; }
+      @media (max-width:680px){
+        .site-nav .bar{ flex-direction:column; align-items:stretch; }
+        .site-nav ul{ flex-direction:column; }
+        .site-nav a.item, .site-nav a.buy{ margin:0; border-radius:0; text-align:center; }
+      }
+      /* ---- Hero call-to-action ---- */
+      .hero-cta { margin:14px 0 4px; }
+      .hero-cta .btn {
+        display:inline-block; margin:4px 6px 4px 0; padding:9px 16px;
+        border-radius:5px; font-weight:600; text-decoration:none; font-size:14px;
+      }
+      .hero-cta .btn.buy { background:#249a4b; color:#fff; }
+      .hero-cta .btn.gh  { background:#3b4252; color:#fff; }
+      .hero-cta .btn:hover { opacity:.92; }
+      footer p:first-child { margin-top:0; }
     </style>
   </head>
   <body>
     <nav class="site-nav">
-      <ul>
-        {% for item in site.nav %}
-          <li><a href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}{% if item.buy %} class="buy"{% endif %}>{{ item.title }}</a></li>
-        {% endfor %}
-      </ul>
+      <div class="bar">
+        <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <ul>
+          {% for item in site.nav %}
+            <li><a class="{% if item.buy %}buy{% else %}item{% endif %}" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
     </nav>
+
     <header>
       <div class="inner">
-        <h1>{{ site.title | default: "60GHz mmWave Radar SDK" }}</h1>
-        <h2>{{ site.description | default: "SDK and documentation for 60GHz mmWave radar sensors." }}</h2>
-        <a href="https://github.com/249263431/60GHz-Radar-SDK" class="button">
-          <small>View the Project on GitHub</small>
-          249263431/60GHz-Radar-SDK
-        </a>
+        <h1>{{ site.title }}</h1>
+        <h2>{{ site.description }}</h2>
+        <div class="hero-cta">
+          <a class="btn buy" href="https://www.tindie.com/stores/fuxinsuo/" target="_blank" rel="noopener">Buy on Tindie</a>
+          <a class="btn gh" href="https://github.com/249263431/60GHz-Radar-SDK" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
       </div>
     </header>
 
@@ -42,6 +79,11 @@
           {{ content }}
         </section>
         <footer>
+          <p>
+            <a href="https://www.tindie.com/stores/fuxinsuo/?ref=offsite_badges&utm_source=sellers_fuxinsuo&utm_medium=badges&utm_campaign=badge_medium" target="_blank" rel="noopener">
+              <img src="https://static.tindie.com/badges/tindie-mediums.png" alt="I sell on Tindie" width="150" height="78">
+            </a>
+          </p>
           <p>This project is maintained by <a href="https://github.com/249263431">249263431</a></p>
           <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist/minimal">orderedlist</a></p>
         </footer>

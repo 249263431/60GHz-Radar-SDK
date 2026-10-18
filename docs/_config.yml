@@ -19,6 +19,10 @@ nav:
     url: /guide/2026/10/17/radar-setup-guide.html
   - title: Home Assistant
     url: /2026/10/18/home-assistant-radar-integration.html
+  - title: Compare
+    url: /compare.html
+  - title: FAQ
+    url: /faq.html
   - title: Buy on Tindie
     url: https://www.tindie.com/stores/fuxinsuo/
     external: true

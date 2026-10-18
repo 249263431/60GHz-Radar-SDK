@@ -9,15 +9,15 @@ plugins:
 nav:
   - title: Home
     url: /
-  - title: Fall Radar
+  - title: Fall
     url: /product/2026/10/17/fall-radar-guide.html
-  - title: Sleep Radar
+  - title: Sleep
     url: /product/2026/10/17/sleep-radar-guide.html
-  - title: Presence Radar
+  - title: Presence
     url: /product/2026/10/17/presence-radar-guide.html
-  - title: Setup & Wi-Fi
+  - title: Setup
     url: /guide/2026/10/17/radar-setup-guide.html
-  - title: Home Assistant
+  - title: Assistant
     url: /2026/10/18/home-assistant-radar-integration.html
   - title: Compare
     url: /compare.html

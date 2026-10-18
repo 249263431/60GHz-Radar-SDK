@@ -21,18 +21,18 @@
       /* ===== Top nav: fixed to viewport top + responsive hamburger on mobile ===== */
       .site-nav { background:var(--nav); position:fixed !important; top:0 !important; left:0 !important; right:0 !important; z-index:100;
         border-bottom:1px solid rgba(255,255,255,.06); box-shadow:0 1px 6px rgba(0,0,0,.18); }
-      .site-nav .bar { margin:0 auto; padding:0 20px;
-        display:flex; align-items:center; flex-wrap:nowrap; gap:10px; }
+      .site-nav .bar { max-width:1120px; margin:0 auto; padding:0 24px;
+        display:flex; align-items:center; flex-wrap:nowrap; gap:8px; }
       .site-nav .brand { color:#fff; font-weight:700; font-size:15px; letter-spacing:.3px;
         text-decoration:none; padding:13px 4px; white-space:nowrap; display:flex; align-items:center; }
       .site-nav .brand .dot { width:9px; height:9px; border-radius:50%; background:var(--accent); margin-right:9px; box-shadow:0 0 8px var(--accent); }
       .site-nav .brand:hover { color:#e2e8f0; }
       .site-nav .nav-toggle, .site-nav .nav-burger { display:none; }
-      .site-nav .nav-menu { display:flex; align-items:center; gap:6px; margin-left:20px; }
+      .site-nav .nav-menu { display:flex; align-items:center; gap:4px; margin-left:20px; }
       .site-nav .nav-menu ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-end; gap:2px; }
-      .site-nav a.item { display:block; color:#cbd5e1; text-decoration:none; padding:13px 8px; font-size:14px; white-space:nowrap; transition:color .15s, background .15s; }
+      .site-nav a.item { display:block; color:#cbd5e1; text-decoration:none; padding:13px 6px; font-size:14px; white-space:nowrap; transition:color .15s, background .15s; }
       .site-nav a.item:hover { color:#fff; background:rgba(255,255,255,.07); }
-      .site-nav a.buy { background:var(--buy); color:#fff; font-weight:700; border-radius:6px; margin-left:8px; padding:9px 15px; white-space:nowrap; transition:background .15s; }
+      .site-nav a.buy { background:var(--buy); color:#fff; font-weight:700; border-radius:6px; margin-left:8px; padding:8px 12px; white-space:nowrap; transition:background .15s; }
       .site-nav a.buy:hover { background:#fb923c; }
       .site-nav .nav-search { position:relative; display:flex; align-items:center; }
       .site-nav .nav-search input {
@@ -79,7 +79,7 @@
       }
 
       /* ===== Reading column (blog style, same on all pages) ===== */
-      .page { max-width:880px; margin:0 auto; padding:44px 24px 64px; font-size:17px; line-height:1.75; color:var(--text); overflow-wrap:break-word; word-break:break-word; }
+      .page { max-width:1120px; margin:0 auto; padding:44px 24px 64px; font-size:17px; line-height:1.75; color:var(--text); overflow-wrap:break-word; word-break:break-word; }
       .page > *:first-child { margin-top:0; }
       .page h1, .page h2, .page h3, .page h4 { color:var(--heading); line-height:1.35; margin:1.8em 0 .6em; font-weight:700; }
       .page h1 { font-size:30px; margin-top:0; }

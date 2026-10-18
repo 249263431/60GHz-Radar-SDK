@@ -38,5 +38,26 @@ See [How mmWave Radar Works]({{ "/fundamentals/2026/10/17/how-mmwave-radar-works
 ## Which one should I buy?
 See [Which 60GHz Radar Should I Buy?]({{ "/compare.html" | relative_url }}).
 
+## Specifications: size, power supply, and wireless
+
+All three finished 60 GHz units join your network over **2.4 GHz Wi-Fi + MQTT**. The bare 24 GHz modules use **UART only** (no Wi-Fi, no network to configure).
+
+| Product | Housing size | Power | Wireless | Typical mounting |
+|---|---|---|---|---|
+| Fall Detection Radar | 87 × 87 × 24 mm | 5 V DC | 2.4 GHz Wi-Fi + MQTT | Ceiling, face down, ≤ 2.8 m |
+| Presence Radar | 29.5 × 73 × 86 mm | 5 V over USB | 2.4 GHz Wi-Fi + MQTT | Recessed in ceiling; module ≤ 2.75 m |
+| Sleep Radar | 80 × 80 × 51.8 mm | 4.5–5.5 V (≈5 V) | 2.4 GHz Wi-Fi + MQTT | Bedside: side-wall 1.8–2.2 m, or above bed head tilted 30°–45° down |
+
+Each product guide has its own `## Specifications` table with the full parameter list (beam angle, current, detection range, etc.). Mounting detail: [Sleep Radar Mounting Position]({{ "/installation/2026/10/16/sleep-radar-installation-position.html" | relative_url }}).
+
+## What protocol and interface does it use?
+
+Two families ship from this store:
+
+- **Finished 60 GHz radar** — connects over **2.4 GHz Wi-Fi** and reports a **JSON property protocol over MQTT topics**. Configure it from a web page (for MQTT) or the Android app (for Wi-Fi), then read it from any broker (Mosquitto / Artemis). See [Home Assistant Integration (Verified)]({{ "/2026/10/18/home-assistant-radar-integration.html" | relative_url }}).
+- **24 GHz radar module** — a bare sensing core with **UART only**, speaking a binary **frame protocol at 115200 bps, 8N1, 3.3 V TTL**. No Wi-Fi, no account; any serial terminal or USB-TTL adapter talks to it. This is the path for embedding the sensor into your own product.
+
+Full comparison: [Two Architectures, Two Protocols: MQTT vs UART]({{ "/guide/2026/10/18/radar-architecture-mqtt-vs-uart.html" | relative_url }}).
+
 ## Still have questions?
 Leave a message on [our Tindie store](https://www.tindie.com/stores/fuxinsuo/){:target="_blank"} or open a GitHub Issue.

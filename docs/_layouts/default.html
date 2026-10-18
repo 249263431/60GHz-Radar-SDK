@@ -115,6 +115,10 @@
         <a class="brand" href="{{ '/' | relative_url }}"><span class="dot"></span>{{ site.title }}</a>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
         <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">&#9776;</label>
+        <form class="nav-search" role="search" onsubmit="return false">
+          <input id="search-input" type="search" placeholder="Search…" aria-label="Search articles">
+          <ul id="search-results"></ul>
+        </form>
         <div class="nav-menu">
           <ul>
             {% for item in site.nav %}{% unless item.buy %}
@@ -124,10 +128,6 @@
           {% for item in site.nav %}{% if item.buy %}
             <a class="buy" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a>
           {% endif %}{% endfor %}
-        <form class="nav-search" role="search" onsubmit="return false">
-          <input id="search-input" type="search" placeholder="Search…" aria-label="Search articles">
-          <ul id="search-results"></ul>
-        </form>
         </div>
       </div>
     </nav>

@@ -20,21 +20,28 @@
 
       /* ===== Top nav (consistent on every page) ===== */
       .site-nav { background:var(--nav); position:sticky; top:0; z-index:50; border-bottom:1px solid rgba(255,255,255,.06); }
-      .site-nav .bar { max-width:860px; margin:0 auto; padding:0 20px;
-        display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+      .site-nav .bar { max-width:1000px; margin:0 auto; padding:0 20px;
+        display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
       .site-nav .brand { color:#fff; font-weight:700; font-size:15px; letter-spacing:.3px;
         text-decoration:none; padding:13px 4px; white-space:nowrap; display:flex; align-items:center; }
       .site-nav .brand .dot { width:9px; height:9px; border-radius:50%; background:var(--accent); margin-right:9px; box-shadow:0 0 8px var(--accent); }
       .site-nav .brand:hover { color:#e2e8f0; }
-      .site-nav ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; }
-      .site-nav a.item { display:block; color:#cbd5e1; text-decoration:none; padding:14px 12px; font-size:14px; white-space:nowrap; transition:color .15s, background .15s; }
+      .site-nav .nav-right { display:flex; align-items:center; gap:6px; flex:1 1 auto; justify-content:flex-end; min-width:0; }
+      .site-nav ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:2px; }
+      .site-nav a.item { display:block; color:#cbd5e1; text-decoration:none; padding:14px 11px; font-size:14px; white-space:nowrap; transition:color .15s, background .15s; }
       .site-nav a.item:hover { color:#fff; background:rgba(255,255,255,.07); }
-      .site-nav a.buy { background:var(--buy); color:#fff; font-weight:700; border-radius:6px; margin:8px 0 8px 6px; padding:8px 14px; transition:background .15s; }
+      .site-nav a.buy { background:var(--buy); color:#fff; font-weight:700; border-radius:6px; margin-left:8px; padding:9px 15px; white-space:nowrap; transition:background .15s; }
       .site-nav a.buy:hover { background:#fb923c; }
       @media (max-width:760px){
-        .site-nav .bar{ flex-direction:column; align-items:stretch; padding:0 12px; }
-        .site-nav ul{ flex-direction:column; }
-        .site-nav a.item, .site-nav a.buy{ margin:0; border-radius:0; text-align:center; }
+        .site-nav .bar{ padding:0 12px; }
+        .site-nav .nav-right{ flex-basis:100%; justify-content:flex-start; flex-wrap:wrap; }
+        .site-nav ul{ justify-content:flex-start; }
+      }
+      @media (max-width:560px){
+        .site-nav .nav-right{ flex-direction:column; align-items:stretch; gap:0; }
+        .site-nav ul{ flex-direction:column; align-items:stretch; }
+        .site-nav a.item{ text-align:center; padding:12px; }
+        .site-nav a.buy{ margin:8px 0 6px; text-align:center; }
       }
 
       /* ===== Reading column (blog style, same on all pages) ===== */
@@ -55,7 +62,7 @@
       .page code { background:#f3f4f6; color:#be123c; padding:2px 6px; border-radius:5px; font-size:.88em; }
       .page pre { background:#0f172a; color:#e2e8f0; padding:18px 20px; border-radius:10px; overflow:auto; font-size:14px; line-height:1.6; }
       .page pre code { background:none; color:inherit; padding:0; font-size:inherit; }
-      .page table { width:100%; border-collapse:collapse; margin:1.5em 0; font-size:15px; }
+      .page table { width:100%; border-collapse:collapse; margin:1.5em 0; font-size:15px; display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
       .page th { background:#f9fafb; color:var(--heading); text-align:left; padding:10px 12px; border:1px solid var(--line); font-weight:700; }
       .page td { border:1px solid var(--line); padding:10px 12px; vertical-align:top; }
       .page hr { border:none; border-top:1px solid var(--line); margin:2em 0; }
@@ -72,11 +79,16 @@
     <nav class="site-nav">
       <div class="bar">
         <a class="brand" href="{{ '/' | relative_url }}"><span class="dot"></span>{{ site.title }}</a>
-        <ul>
-          {% for item in site.nav %}
-            <li><a class="{% if item.buy %}buy{% else %}item{% endif %}" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a></li>
-          {% endfor %}
-        </ul>
+        <div class="nav-right">
+          <ul>
+            {% for item in site.nav %}{% unless item.buy %}
+              <li><a class="item" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a></li>
+            {% endunless %}{% endfor %}
+          </ul>
+          {% for item in site.nav %}{% if item.buy %}
+            <a class="buy" href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>{{ item.title }}</a>
+          {% endif %}{% endfor %}
+        </div>
       </div>
     </nav>
 

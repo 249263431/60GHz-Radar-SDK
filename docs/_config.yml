@@ -5,3 +5,21 @@ baseurl: /60GHz-Radar-SDK
 url: https://249263431.github.io
 plugins:
   - jekyll-sitemap
+
+nav:
+  - title: Home
+    url: /
+  - title: Fall Radar
+    url: /product/2026/10/17/fall-radar-guide.html
+  - title: Sleep Radar
+    url: /product/2026/10/17/sleep-radar-guide.html
+  - title: Presence Radar
+    url: /product/2026/10/17/presence-radar-guide.html
+  - title: Setup & Wi-Fi
+    url: /guide/2026/10/17/radar-setup-guide.html
+  - title: Home Assistant
+    url: /2026/10/18/home-assistant-radar-integration.html
+  - title: Buy on Tindie
+    url: https://www.tindie.com/stores/fuxinsuo/
+    external: true
+    buy: true

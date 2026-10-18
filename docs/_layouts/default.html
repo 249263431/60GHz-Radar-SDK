@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <style>
+      .site-nav { background:#2e2e2e; text-align:center; }
+      .site-nav ul { list-style:none; margin:0 auto; padding:0; display:inline-flex; flex-wrap:wrap; max-width:980px; }
+      .site-nav li { margin:0; }
+      .site-nav a { display:block; color:#fff; text-decoration:none; padding:10px 14px; font-size:14px; white-space:nowrap; }
+      .site-nav a:hover { background:#444; }
+      .site-nav a.buy { background:#b6332e; font-weight:bold; }
+      .site-nav a.buy:hover { background:#d33; }
+      @media (max-width:600px){ .site-nav ul{ flex-direction:column; } }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <ul>
+        {% for item in site.nav %}
+          <li><a href="{{ item.url | relative_url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}{% if item.buy %} class="buy"{% endif %}>{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <header>
+      <div class="inner">
+        <h1>{{ site.title | default: "60GHz mmWave Radar SDK" }}</h1>
+        <h2>{{ site.description | default: "SDK and documentation for 60GHz mmWave radar sensors." }}</h2>
+        <a href="https://github.com/249263431/60GHz-Radar-SDK" class="button">
+          <small>View the Project on GitHub</small>
+          249263431/60GHz-Radar-SDK
+        </a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          {{ content }}
+        </section>
+        <footer>
+          <p>This project is maintained by <a href="https://github.com/249263431">249263431</a></p>
+          <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist/minimal">orderedlist</a></p>
+        </footer>
+      </div>
+    </div>
+
+    <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
+  </body>
+</html>

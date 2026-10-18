@@ -200,16 +200,14 @@ The device supports local language learning for custom voice commands. Learning 
 | Sleep data inaccurate | Radar not aligned | Tilt 30°–45° above bed head |
 | Voice command not working | Learning mode not entered | Enter learning mode first |
 
-## Documentation
+## Articles & Resources
 
-- [Product guides]({{ '/product/' | relative_url }})
-- [Setup & integration guides]({{ '/guide/' | relative_url }})
-- [Home Assistant & integrations]({{ '/integration/' | relative_url }})
-- [Fundamentals & concepts]({{ '/fundamentals/' | relative_url }})
-- [Browse everything by category]({{ '/archive.html' | relative_url }})
+- [Browse all articles by category]({{ '/archive.html' | relative_url }})
+- [Browse by tag]({{ '/tags/' | relative_url }})
+- [Subscribe via RSS]({{ '/feed.xml' | relative_url }})
 
 ### On This Page
 
-- [Installation Guide](#installation-notes)
+- [Installation Notes](#installation-notes)
 - [Communication Protocols](#communication-protocols)
 - [Voice Commands](#voice-commands)

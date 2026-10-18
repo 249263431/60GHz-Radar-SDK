@@ -118,6 +118,26 @@
       .site-footer p { margin:.5em 0; }
       .site-footer img { margin-top:8px; }
       ::selection { background:#bae6fd; }
+
+      /* ===== Listing layout: left sidebar (facets) + article list ===== */
+      .listing-layout { display:flex; gap:32px; align-items:flex-start; }
+      .sidebar { position:sticky; top:72px; flex:0 0 220px; width:220px; font-size:14px; }
+      .sidebar-count { color:var(--muted); font-size:13px; margin-bottom:6px; }
+      .sidebar h3 { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:18px 0 8px; }
+      .sidebar .facet-list { list-style:none; padding:0; margin:0; }
+      .sidebar .facet-list a { display:flex; justify-content:space-between; gap:8px; padding:5px 0; color:var(--link); text-decoration:none; }
+      .sidebar .facet-list a:hover { text-decoration:underline; }
+      .sidebar .count { color:var(--muted); font-size:12px; white-space:nowrap; }
+      .sidebar .year-head { font-weight:600; margin:12px 0 4px; display:flex; justify-content:space-between; }
+      .sidebar .month-list { list-style:none; padding:0 0 0 10px; margin:0; }
+      .sidebar .month-list label { display:flex; align-items:center; gap:6px; padding:3px 0; cursor:pointer; color:var(--text); }
+      .sidebar .month-list input { margin:0; }
+      .sidebar .facet-clear { background:none; border:none; color:var(--link); cursor:pointer; padding:2px 0; font-size:13px; }
+      .listing-main { flex:1 1 auto; min-width:0; }
+      @media (max-width:900px){
+        .listing-layout { flex-direction:column; }
+        .sidebar { position:static; width:auto; flex:none; }
+      }
     </style>
   </head>
   <body>

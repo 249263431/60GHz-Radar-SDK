@@ -1,0 +1,61 @@
+---
+layout: default
+---
+<div class="listing-layout">
+  <aside class="sidebar">
+    <div class="sidebar-count" id="facet-count"></div>
+    <div class="facet">
+      <h3>Categories</h3>
+      <ul class="facet-list">
+      {% assign cats = "fundamentals,product,guide,integration" | split: "," %}
+      {% assign names = "Fundamentals,Products,Guides,Integrations" | split: "," %}
+      {% for cat in cats %}{% assign n = site.categories[cat].size %}{% if n > 0 %}
+        <li><a href="{{ site.baseurl }}/{{ cat }}/">{{ names[forloop.index0] }} <span class="count">{{ n }}</span></a></li>
+      {% endif %}{% endfor %}
+      </ul>
+    </div>
+    <div class="facet">
+      <h3>By Date</h3>
+      <button class="facet-clear" data-clear="date">Show all dates</button>
+      {% assign by_year = site.posts | group_by_exp: "p", "p.date | date: '%Y'" %}
+      {% assign years_sorted = by_year | sort: "name" | reverse %}
+      {% for y in years_sorted %}
+        <div class="year">
+          <div class="year-head">{{ y.name }} <span class="count">{{ y.items.size }}</span></div>
+          <ul class="month-list">
+          {% assign months = y.items | group_by_exp: "p", "p.date | date: '%Y-%m'" %}
+          {% assign months_sorted = months | sort: "name" | reverse %}
+          {% for m in months_sorted %}
+            <li><label><input type="checkbox" class="facet-month" value="{{ m.name }}"> {{ m.name }} <span class="count">{{ m.items.size }}</span></label></li>
+          {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </aside>
+  <div class="listing-main">
+    {{ content }}
+  </div>
+</div>
+<script>
+(function(){
+  var months = Array.prototype.slice.call(document.querySelectorAll('.facet-month'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.post-item'));
+  var clearBtn = document.querySelector('[data-clear="date"]');
+  var counter = document.getElementById('facet-count');
+  function apply(){
+    var sel = months.filter(function(c){ return c.checked; }).map(function(c){ return c.value; });
+    var shown = 0;
+    items.forEach(function(li){
+      var d = li.getAttribute('data-date');
+      var ok = sel.length === 0 || sel.indexOf(d) > -1;
+      li.style.display = ok ? '' : 'none';
+      if(ok) shown++;
+    });
+    if(counter) counter.textContent = shown + (shown === 1 ? ' article' : ' articles');
+  }
+  months.forEach(function(c){ c.addEventListener('change', apply); });
+  if(clearBtn) clearBtn.addEventListener('click', function(e){ e.preventDefault(); months.forEach(function(c){ c.checked = false; }); apply(); });
+  apply();
+})();
+</script>

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: listing
 title: Articles
 permalink: /archive.html
 description: All articles published on the 60GHz mmWave Radar SDK site, grouped by category.
@@ -19,7 +19,7 @@ Browse every article we've published, grouped by category. You can also [subscri
 
 <ul class="post-list">
 {% for post in posts %}
-  <li>
+  <li class="post-item" data-date="{{ post.date | date: '%Y-%m' }}" data-category="{{ post.categories | join: ' ' }}">
     <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
     <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
   </li>

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: listing
 title: Integrations
 permalink: /integration/
 description: Connect your 60GHz mmWave radar to Home Assistant, MQTT brokers, and dashboards.
@@ -11,7 +11,7 @@ description: Connect your 60GHz mmWave radar to Home Assistant, MQTT brokers, an
 
 <ul class="post-list">
 {% for post in site.categories.integration %}
-  <li>
+  <li class="post-item" data-date="{{ post.date | date: '%Y-%m' }}" data-category="{{ post.categories | join: ' ' }}">
     <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
     <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
   </li>

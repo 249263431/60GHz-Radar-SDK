@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Real Demand, Hard Physics: Fall Detection Has Learned to Ignore the Toilet"
-date: 2026-10-19
+date: 2026-10-19 09:00:00 +0800
 categories: [guide]
 tags: [fall detection, elderly care, mmwave radar, false alarms, market, industry, product definition, bathroom, deployment]
 description: "Why elderly fall alarms are a real need, why four bathroom scenes (toilet, shower, appliances, wind-blown cloth) defeated naive radar, and how the false-alarm problem was solved at the algorithm layer."

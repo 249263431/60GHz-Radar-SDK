@@ -1,6 +1,6 @@
 ---
 title: "TOF + mmWave Radar Fusion: Why Senior-Care Accuracy Is Genuinely Higher"
-date: 2026-10-20
+date: 2026-10-20 09:00:00 +0800
 categories: [guide]
 tags: [tof, mmwave, radar, sensor-fusion, elderly-care]
 description: "Time-of-Flight depth sensing and mmWave radar fail in different places and cover each other's blind spots — TOF for contour and distance, radar for micro-motion and penetration. Here is where fusion genuinely raises precision in elderly-care sensing, and where it does not."

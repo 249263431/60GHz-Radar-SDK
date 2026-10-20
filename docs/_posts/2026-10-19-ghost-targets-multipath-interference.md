@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ghost Targets and Glass Walls: Multipath Interference in Home Radar Care"
-date: 2026-10-19
+date: 2026-10-19 09:00:00 +0800
 categories: [guide]
 tags: [multipath, ghost targets, interference, mmwave radar, elderly care, fall detection, presence radar, scene mode, sensitivity, deployment]
 description: "Why multipath reflections and clutter make people-counting and fall detection unreliable in home radar — and how scene mode, zone detection, and sensitivity tuning suppress them."

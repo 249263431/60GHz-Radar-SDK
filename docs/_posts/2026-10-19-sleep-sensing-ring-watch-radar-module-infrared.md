@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Building a Sleep Product? What Rings, Watches, mmWave Radar Modules, and Infrared Actually Measure"
-date: 2026-10-19
+date: 2026-10-19 09:00:00 +0800
 categories: [guide]
 tags: [sleep monitoring, mmwave radar, radar module, infrared, wearable, ring, watch, ppg, accelerometer, hrv, rem, psg]
 description: "A plain-language comparison of the four ways to sense sleep — rings, watches, mmWave radar modules, and infrared — covering what each measures directly and what it can only infer."

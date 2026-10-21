@@ -84,6 +84,58 @@ Feed **GP2** (High = someone present) into the loop so the PLC only registers a 
 - **False alarms happen.** Moving non-living objects (fans, curtains, flowing water) can trip it; a side-lying person may be missed. Use GP1 for a fast local/open-contact signal and UART/MQTT for logging; design redundancy.
 - **Not a medical device.** A sensing building block, not a life-safety system; not for diagnosis or treatment.
 
+## Module specifications (R60AFD1-V datasheet)
+
+Every figure below is taken from the R60AFD1-V datasheet v2.1 (MicRadar / 云帆瑞达). Nothing here is assumed.
+
+**Interface 1 — the connector you actually use (2×3, 2.0 mm pitch):**
+
+| Pin | Signal | Level | Notes |
+|---|---|---|---|
+| 1 | 5V | 5.0 V | Power input + |
+| 2 | GND | — | Ground |
+| 3 | RX | 3.3 V TTL | UART receive |
+| 4 | TX | 3.3 V TTL | UART transmit |
+| 5 | GP1 | 3.3 V / 0 V | **High = fall alarm, Low = clear** |
+| 6 | GP2 | 3.3 V / 0 V | High = occupied, Low = empty |
+
+Interface 2 (2×4) is the programming/debug port: 3V3, GND, SWC, SWD, GP3–GP6. GP3–GP6 are spare and user-redefinable.
+
+**Electrical (operating):**
+
+| Parameter | Min | Typ | Max | Unit |
+|---|---|---|---|---|
+| VCC | 4.5 | 5.0 | 5.5 | V |
+| Average current (ICC) | — | — | 100 | mA |
+| Peak current (Ipeak) | — | — | 300 | mA |
+| Operating temperature | −20 | — | +70 | °C |
+| Storage temperature | −40 | — | +85 | °C |
+
+Supply ripple must be **≤ 100 mV**; the supply must deliver enough current and transient response for the 300 mA peak.
+
+**RF and detection:**
+
+| Parameter | Value |
+|---|---|
+| Frequency | 61 – 62.5 GHz |
+| Tx power | 8 dBm typ, 10 dBm max |
+| Antenna gain | 8 dBi |
+| Detection radius (motion / fall / static dwell) | 1.5 m typ @ 2.8 m ceiling |
+| Beam angle (horizontal / pitch) | 100° / 100° |
+| Motion output latency | ≤ 100 ms |
+| Nobody → nobody-absent output | 10 – 60 s |
+| Fall detection latency | 5 – 20 s (15 s typ) |
+
+**Install and configuration:**
+
+- Ceiling mount, vertical down; install height **2.2 – 2.8 m** (default height setting **2.3 m** — must match the actual height).
+- Fall report time: default **15 s**, adjustable **5 – 180 s**; normal projects use **≥ 60 s**.
+- Static-dwell report time: default **300 s**; normal projects use **≥ 30 min**.
+- Power-on stabilization: **≥ 30 s** before trusting the output.
+- Module volume: 35 × 31 × 7.5 mm. Protocol: SIP-S V1.0 (generic UART) and the Tuya standard protocol.
+
+The key point for this article: GP1 is a **3.3 V logic output, not 24 V** — which is exactly why the optocoupler is required between it and the PLC.
+
 ## Where to go next
 
 - The GPIO/UART split: [GPIO vs UART]({{ site.baseurl }}{% post_url 2026-10-21-gpio-vs-uart-fall-alarm-without-parser %}).

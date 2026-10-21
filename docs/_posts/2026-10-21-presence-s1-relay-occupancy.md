@@ -71,6 +71,41 @@ S2 is High only when the person is **moving**. If you drive the relay from S1 al
 - **Known false-alarm sources:** fans, pets near the radar, swinging metal curtains, and the internal motor of an air conditioner directly in the beam. Aim the beam away from these.
 - **Not a medical device.** A sensing building block; not for diagnosis or treatment.
 
+## Module specifications (R24AVD1 guide)
+
+Every figure below is from the R24AVD1 getting-started guide (MicRadar / 云帆瑞达). Note: this guide does **not** publish VCC or current — power the module per its datasheet; the I/O levels below are the only electrical values given (all 3.3 V).
+
+**Output pins (3.3 V logic):**
+
+| Pin | High | Low | Notes |
+|---|---|---|---|
+| S1 | occupied | unoccupied | presence |
+| S2 | active (moving) | static | motion vs stillness |
+| GP1–GP4 | redefinable | — | parameter-selection control, user-redefinable |
+
+**Data points (protocol):**
+
+| DP | Function | Behavior |
+|---|---|---|
+| DP1 | occupied / unoccupied | unoccupied→occupied ≤ 0.5 s; occupied→unoccupied 40 s |
+| DP2 | static / active | switch reported ≤ 0.5 s |
+| DP3 | approach / leave / no-direction move | 2 s per report |
+| DP4 | body-motion amplitude | 0–100, 5 s per report |
+| DP5 | sensitivity | 1–10 (default 7) |
+| DP6 | scene mode | area / bathroom / hotel / bedroom / office / max-area |
+
+Body-motion amplitude (DP4): **0%** none; **1%** static (sleep, breathing only); **2–30%** micro motion; **31–60%** walk / slow limb; **61–100%** run / large close motion.
+
+**Sensitivity bands (DP5, default 7):** low (1–3) for corridor/parking — large motion only, rejects curtain/plant sway; mid (4–6) normal indoor; high (7–10) low-interference spaces — fine motion, but prone to false "occupied".
+
+**Coverage and range (ceiling mount):** beam **90° horizontal / 60° pitch**. Install height **≤ 2.75 m**, tilt ≤ 3°, antenna face **3–5 mm** from a non-metal, flat enclosure. Detection at ceiling: motion ≈ 8 m × 12 m, static ≈ 4 m × 6 m, sleep ≈ 3 m × 2 m. Max diameters: motion 12 m, static 6 m, sleep 3 m.
+
+**Scene-mode ranges (trigger / static diameter):** max-area 12/8 m & 6/4 m; office 10/7 m & 6/4 m; hotel (default) 9/6 m & 6/4 m; living 7/5 m & 6/4 m; bedroom 4/3 m & 6/4 m; area-detect 3/2 m & 6/4 m; bathroom 1.8/1.5 m & 6/4 m.
+
+**Interference (from the guide):** moving non-living objects — metal/liquid motion, oscillating fans, pets near the radar, swinging metal curtains — cause false triggers. Do **not** aim the beam directly at an air conditioner (its internal motor false-triggers); aim parallel to it instead.
+
+**Layout:** keep the radar's components ≥ 1 mm above other PCBA parts; the enclosure face must be non-metal and flat (no curved surface).
+
 ## Where to go next
 
 - The GPIO/UART split: [GPIO vs UART]({{ site.baseurl }}{% post_url 2026-10-21-gpio-vs-uart-fall-alarm-without-parser %}).

@@ -14,13 +14,13 @@ From the SIP-S V1.0 definition in the module user manuals (e.g. R60ABD1 user man
 
 | Field | Bytes | Value |
 |---|---|---|
-| Header 帧头 | 2 | `0x53`, `0x59` |
-| Control 控制字 | 1 | function class |
-| Command 命令字 | 1 | content tag |
-| Length 长度标识 | 2 | number of data bytes (big-endian) |
-| Data 数据 | n | payload |
-| Checksum 校验码 | 1 | sum(header+control+command+length+data), low 8 bits |
-| Footer 帧尾 | 2 | `0x54`, `0x43` |
+| Header | 2 | `0x53`, `0x59` |
+| Control | 1 | function class |
+| Command | 1 | content tag |
+| Length | 2 | number of data bytes (big-endian) |
+| Data | n | payload |
+| Checksum | 1 | sum(header+control+command+length+data), low 8 bits |
+| Footer | 2 | `0x54`, `0x43` |
 
 Serial: 115200 bps, 8 data, 1 stop, no parity, no flow control; **3.3 V TTL**; module TX → MCU/adapter RX.
 

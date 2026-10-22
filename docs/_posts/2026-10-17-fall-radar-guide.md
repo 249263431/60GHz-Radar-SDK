@@ -3,7 +3,7 @@ layout: post
 title: "The Fall Detection Radar: How Alarms Work, How to Tune Them, and What to Expect"
 date: 2026-10-17 09:00:00 +0800
 categories: [product]
-tags: [fall radar, 60ghz, 24ghz, fall detection, dwell alarm, bathroom, mqtt]
+tags: [fall radar, 60GHz, 24GHz, fall detection, dwell alarm, bathroom, mqtt]
 ---
 
 <!-- filename: 2026-10-17-fall-radar-guide.md -->

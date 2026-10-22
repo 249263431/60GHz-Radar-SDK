@@ -3,7 +3,7 @@ layout: post
 title: "The Presence Detection Radar: Range, Sensitivity, and Scene Modes"
 date: 2026-10-17 09:00:00 +0800
 categories: [product]
-tags: [presence radar, 60ghz, 24ghz, occupancy, scene mode, sensitivity, mqtt]
+tags: [presence radar, 60GHz, 24GHz, occupancy, scene mode, sensitivity, mqtt]
 ---
 
 <!-- filename: 2026-10-17-presence-radar-guide.md -->

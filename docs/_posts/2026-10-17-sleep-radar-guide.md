@@ -3,7 +3,7 @@ layout: post
 title: "The Sleep Monitoring Radar: What It Measures, How to Install It, and How to Read the Data"
 date: 2026-10-17 09:00:00 +0800
 categories: [product]
-tags: [sleep radar, 60ghz, breathing, heart rate, sleep stages, installation, mqtt]
+tags: [sleep radar, 60GHz, breathing, heart rate, sleep stages, installation, mqtt]
 ---
 
 <!-- filename: 2026-10-17-sleep-radar-guide.md -->

@@ -25,7 +25,7 @@ You need:
 
 1. A broker reachable on your network (e.g. `192.168.1.2:1883`) with a username and password.
 2. Your presence radar configured for MQTT (broker IP, port 1883, credentials) — covered in the setup guide.
-3. The device's **DeviceID**. On our radars the DeviceID *is* the device MAC address, which is also the MQTT ClientID, and it is printed on the back of the device. No manual registration needed.
+3. The device's **DeviceID**. On our radars the DeviceID *is* the device MAC address, which is also the **default** MQTT ClientID. It is printed on the device label and shown on the configuration page; you can change the ClientID, but keep it unique per device — two devices sharing one ClientID keep kicking each other off.
 
 The presence radar uses the prefix `RadarHP`. Unlike the fall/sleep radars, it does **not** use a single `/sys/property/post` topic. Instead it splits its output across two report topics:
 

@@ -50,6 +50,18 @@ Gotchas:
 
 Full walkthrough with screenshots and a troubleshooting table: [Wi-Fi Provisioning & MQTT Setup Guide]({{ "/guide/2026/10/17/radar-setup-guide.html" | relative_url }}).
 
+### What is the difference between the DeviceID and the ClientID?
+They are two different things, and confusing them is the most common cause of a radar that keeps disconnecting.
+
+| | **DeviceID** | **ClientID** |
+|---|---|---|
+| What it is | The device's **MAC address** | The MQTT client identifier |
+| Where you see it | Printed on the device label, and shown on the configuration page at `192.168.0.1` | Entered on that same page |
+| Can you change it | **No** | **Yes — it defaults to the MAC** |
+| Where it appears | In the topic path: `/Radar60SP/{DeviceID}/sys/property/post` | Nowhere visible; it identifies the connection to the broker |
+
+The rule that matters: **the ClientID must be unique per device.** Two devices sharing one ClientID keep kicking each other off the broker. Leaving it at the default — the MAC — is already unique, which is why we recommend not changing it.
+
 ### Is there an iOS app?
 **No.** The configuration app is Android only (`BK_BLE5.apk`). The MQTT settings are entered on the module's own hotspot page, so no app is needed for that half of the setup — you do need an Android phone to push the Wi-Fi credentials over Bluetooth.
 
@@ -75,6 +87,17 @@ See [Home Assistant Integration (Verified)]({{ "/integration/2026/10/18/home-ass
 ### Can I use it without Home Assistant?
 **Yes.** Anything that speaks MQTT works: a command-line client, Node-RED, your own backend. Home Assistant is one option, not a requirement.
 
+### Which MQTT topics does the radar publish to?
+Each model has its own prefix, with the DeviceID (the MAC address) in the path:
+
+| Model | Report topic |
+|---|---|
+| 60 GHz sleep radar | `/Radar60SP/{DeviceID}/sys/property/post` |
+| 60 GHz fall radar | `/Radar60FL/{DeviceID}/sys/property/post` |
+| 24 GHz presence radar | `/RadarHP/{DeviceID}/sys/property/post` |
+
+Settings go to the matching `.../sys/property/set` topic. Replace `{DeviceID}` with the MAC printed on the device label and you can subscribe with any MQTT client. A UART-only module behind your own gateway publishes wherever your firmware says — the [ESP32-S3 gateway guide]({{ "/guide/2026/10/22/r60abd1-esp32-s3-sip-s-mqtt.html" | relative_url }}) uses `radar/R60ABD1/state`.
+
 ### What protocol and interface does it use?
 
 Two families ship from this store:
@@ -88,7 +111,7 @@ Full comparison: [Two Architectures, Two Protocols: MQTT vs UART]({{ "/fundament
 Any MQTT 3.1/5 broker works. For a self-hosted Linux box, see [Run Your Own MQTT Broker for 60GHz Radar: An Apache Artemis Setup Guide]({{ "/guide/2026/10/23/apache-artemis-mqtt-broker-radar.html" | relative_url }}).
 
 ### Can I install several radars in one home?
-Yes. Give every device a **unique ClientID** and its own broker account, and name the IDs by room (`fl-bathroom-01`). A worked three-radar example is in [Building an Aging-in-Place Care System with Three 60GHz Radars]({{ "/guide/2026/10/23/aging-in-place-care-system-three-radars.html" | relative_url }}).
+Yes. Give every device a **unique ClientID** — the default, the MAC, already is — and its own broker account. Because topics are keyed to the MAC, put the room name in **Home Assistant areas and entity names** rather than in the topic. Full guide: [Running Several Radars in One Home]({{ "/guide/2026/10/24/running-several-radars-one-home.html" | relative_url }}); a worked three-radar example: [Building an Aging-in-Place Care System with Three 60GHz Radars]({{ "/guide/2026/10/23/aging-in-place-care-system-three-radars.html" | relative_url }}).
 
 ## Accuracy & expectations
 
@@ -97,6 +120,11 @@ See [Three mmWave Radar Specs That Are Almost Always Exaggerated]({{ "/fundament
 
 ### Why does it false-alarm?
 The usual sources are moving non-living objects: electric fans, the internal motor of an air conditioner, pets near the beam, swaying metal curtains, and water pipes. Keep them out of the main lobe and lower the sensitivity where the room is small. See [Fall Detection Failure Modes]({{ "/fundamentals/2026/10/17/fall-detection-failure-modes.html" | relative_url }}) and [Ghost Targets and Multipath Interference]({{ "/guide/2026/10/19/ghost-targets-multipath-interference.html" | relative_url }}).
+
+### How do I check that the radar is installed correctly?
+Subscribe to the distance and position outputs for a few minutes before calling an installation done. In an empty room a healthy radar reports **no target**; walking the room should show body movement in the 31–60 % band, dropping to about **1 %** when you stand still, and the room should take about **40 s** to report empty after you leave.
+
+Those fields are documented as **non-critical with limited accuracy**, so use them to commission the install — never as a product feature. Method and troubleshooting table: [Using Distance and Position Output to Debug a Radar Installation]({{ "/guide/2026/10/24/distance-position-debug-installation.html" | relative_url }}).
 
 ### How much latency / how real-time?
 See [Why mmWave Radar Takes Seconds to Respond]({{ "/fundamentals/2026/10/17/radar-latency-explained.html" | relative_url }}).
@@ -110,6 +138,15 @@ See [How mmWave Radar Works]({{ "/fundamentals/2026/10/17/how-mmwave-radar-works
 The language is **specified when you place the order** (Chinese or English) and is set at the factory. If the wrong language arrives, the wake word and the two fall replies can be **re-taught on the device** — dialects and other languages included. See the [fall radar guide]({{ "/product/2026/10/17/fall-radar-guide.html" | relative_url }}).
 
 ## Power & mounting
+
+### What do I need to know about powering and enclosing a module?
+Three things decide whether a module works inside your product: the supply, the ground, and the housing over the antenna.
+
+- **Supply.** 4.5–5.5 V (typ. 5.0 V) for the 60 GHz modules, with **ripple ≤ 100 mV**; the 3.3 V on the pinout is the I/O level, not the supply. The 24 GHz module's VCC and current are in its datasheet.
+- **Enclosure.** Non-metallic and **flat** over the antenna face, with the antenna **3–5 mm** from the inner shell surface, and the radar component kept at least 1 mm above the surrounding parts.
+- **Ground.** Keep the module and any switched load on separate supplies joined at a single ground point.
+
+Full detail: [Powering and Enclosing a 60GHz Radar Module]({{ "/guide/2026/10/24/power-enclosure-emc-radar-module.html" | relative_url }}).
 
 ### What are the power and mounting requirements?
 See [Sleep Radar Mounting Position]({{ "/guide/2026/10/16/sleep-radar-installation-position.html" | relative_url }}), and the tables below.

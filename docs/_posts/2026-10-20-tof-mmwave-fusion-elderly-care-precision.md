@@ -3,10 +3,10 @@ title: "TOF + mmWave Radar Fusion: Why Senior-Care Accuracy Is Genuinely Higher"
 date: 2026-10-20 09:00:00 +0800
 categories: [guide]
 tags: [tof, mmwave, radar, sensor-fusion, elderly-care]
-description: "Time-of-Flight depth sensing and mmWave radar fail in different places and cover each other's blind spots — TOF for contour and distance, radar for micro-motion and penetration. Here is where fusion genuinely raises precision in elderly-care sensing, and where it does not."
+description: "Time-of-Flight depth sensing and mmWave radar fail in different places and cover each other's gaps — TOF for contour and distance, radar for micro-motion and penetration. Here is where fusion genuinely raises precision in elderly-care sensing, and where it does not."
 ---
 
-If you are specifying sensors for elderly-care monitoring and someone proposes fusing a Time-of-Flight (TOF) depth sensor with a mmWave radar module, here is the direct answer: **the combined precision is genuinely higher** — not as a slogan, but because the two technologies fail in different places and cover each other's blind spots. This article states the conclusion first, then shows the mechanism, where fusion actually pays off, where it does not, and how cost should drive the final choice.
+If you are specifying sensors for elderly-care monitoring and someone proposes fusing a Time-of-Flight (TOF) depth sensor with a mmWave radar module, here is the direct answer: **the combined precision is genuinely higher** — not as a slogan, but because the two technologies fail in different places and cover each other's gaps. This article states the conclusion first, then shows the mechanism, where fusion actually pays off, where it does not, and how cost should drive the final choice.
 
 ## TOF: optical ranging with a hard ceiling
 
@@ -16,7 +16,7 @@ The ceiling is physical, not a tuning issue: **light does not penetrate.** Fog, 
 
 ## mmWave radar: motion and penetration, weak at counting
 
-A mmWave radar is exquisitely **sensitive to motion**. It detects whether something is moving, how much, and at what micro scale — breathing-level movement included. Its radio energy **penetrates clothing** and, to a useful degree, water vapour and steam, so it can judge whether a person is truly lying on the floor and whether their motion has changed, even where an optical sensor would be blinded.
+A mmWave radar is exquisitely **sensitive to motion**. It detects whether something is moving, how much, and at what micro scale — breathing-level movement included. Its radio energy **penetrates clothing** and, to a useful degree, water vapour and steam, so it can judge whether a person is truly lying on the floor and whether their motion has changed, even where an optical sensor would fail.
 
 The weak spot is **people separation**. Two bodies standing close together merge into one blurred cluster of motion points; the radar cannot resolve a clean contour of each person the way a depth camera can.
 
@@ -40,7 +40,7 @@ This is where the complementarity is most obvious — and it is exactly the plac
 - **mmWave penetrates clothing and vapour**, and reports whether the person has really gone down and whether motion has stopped or changed — the questions a fall alarm actually asks.
 - But the same bathroom can hold **two people** (a carer and the resident). For counting and telling them apart, **TOF recovers clean separate contours** where the radar would blur them into one.
 
-Net result: fusion is more accurate for **fall detection** (radar sees through what blinds TOF) and for **people counting** (TOF resolves what radar blurs). Both failure modes that plague single-sensor installs get closed at once.
+Net result: fusion is more accurate for **fall detection** (radar sees through what defeats TOF) and for **people counting** (TOF resolves what radar blurs). Both failure modes that plague single-sensor installs get closed at once.
 
 ## Cost and product positioning
 
@@ -50,7 +50,7 @@ So fusion is not automatically the right answer for every product. The precision
 
 ## Where fusion does NOT help
 
-Fusion raises precision only where the blind spots are complementary. It does nothing for:
+Fusion raises precision only where the gaps are complementary. It does nothing for:
 
 - **Wrong geometry or poor install** — if neither sensor is aimed at the scene it watches, fusion just combines two wrong answers.
 - **Calibration and sync** — the two sensors must be aligned and time-synced; drift or disagreement between them creates a new error class (which sensor do you believe?).

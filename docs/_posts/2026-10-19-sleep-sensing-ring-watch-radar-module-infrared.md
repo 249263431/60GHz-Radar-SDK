@@ -58,7 +58,7 @@ So neither technology is the whole answer:
 - **Radar module** → micro-motion is reliable (breathing, heartbeat-level movement, presence)
 - **Infrared** → posture is reliable (sat up, rolled over, left the bed)
 
-Put them together and each covers the other's blind spot. If your product cares about both "is she breathing steadily?" and "did he just get out of bed?", a single modality will always leave you guessing about one of them.
+Put them together and each covers the other's gap. If your product cares about both "is she breathing steadily?" and "did he just get out of bed?", a single modality will always leave you guessing about one of them.
 
 ## Where sleep staging actually comes from
 

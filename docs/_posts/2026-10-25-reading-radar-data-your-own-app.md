@@ -59,7 +59,7 @@ Some models publish extra topics worth knowing. The presence radar, for example,
 
 - **QoS.** QoS 0 is fine for high-frequency vitals on a LAN, where the next reading arrives in three seconds anyway. Use QoS 1 when a missed message is expensive — a fall event, for instance. QoS 2 is unnecessary here and adds round trips.
 - **Persistent session.** If your backend must not miss messages while it restarts, connect with a fixed client ID, `clean_session=False`, and subscribe at QoS 1. The broker then queues what you missed.
-- **Keepalive.** 60 s is comfortable on a LAN. It only sets how fast a dead connection is noticed.
+- **Keepalive.** 60 s is comfortable on a LAN. It only sets how fast a dropped connection is noticed.
 - **Last Will and Testament.** Register an LWT so the broker publishes an offline status for your service if it drops. Where the radar publishes its own online topic, prefer that for the device's own health and use LWT for your service.
 - **Retained.** Do not retain high-frequency report topics — you do not want a broker to hand a new subscriber a three-second-old breathing rate as if it were current state. Retaining is reasonable for a "last known status" topic you publish yourself.
 - **Version field.** Finished units include `version` in the JSON. Read it, log it, and ignore unknown keys rather than failing: new fields can appear in later firmware.

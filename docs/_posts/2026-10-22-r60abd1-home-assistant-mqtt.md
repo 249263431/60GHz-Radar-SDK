@@ -114,7 +114,7 @@ mqtt:
 ```
 {% endraw %}
 
-`expire_after` marks the entity **unavailable** if the broker goes quiet, so a dropped gateway doesn't leave a stale number on the dashboard.
+`expire_after` marks the entity **unavailable** if the broker stops publishing, so a dropped gateway doesn't leave a stale number on the dashboard.
 
 ## Dashboard (Lovelace)
 

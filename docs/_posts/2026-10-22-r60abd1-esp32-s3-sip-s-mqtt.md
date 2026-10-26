@@ -137,7 +137,7 @@ The R60ABD1 manual defines these report frames (manual v3.6, §7 command tables)
 | `0x84` | `0x06` | sleep quality score | 1 byte, 0–100 |
 | `0x84` | `0x0C` | comprehensive sleep status | 8 bytes: presence(1/0), state(3/2/1/0), avg breath, avg heart, turns, large-motion %, small-motion %, apnea |
 
-Example: a breathing-rate frame is `53 59 81 02 00 01 [rate] [chk] 54 43`. A sleep-state frame is `53 59 84 02 00 01 [state] [chk] 54 43`. The manual's own test vector `53 59 80 81 00 01 0F BD 54 43` (checksum `0xBD`) is a handy parser sanity check.
+Example: a breathing-rate frame is `53 59 81 02 00 01 [rate] [chk] 54 43`. A sleep-state frame is `53 59 84 02 00 01 [state] [chk] 54 43`. The manual's own test vector `53 59 80 81 00 01 0F BD 54 43` (checksum `0xBD`) is a handy parser verification case.
 
 ## Optional: publish to MQTT
 

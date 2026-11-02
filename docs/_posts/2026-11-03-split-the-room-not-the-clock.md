@@ -9,7 +9,7 @@ description: "At 3 a.m. one sensor has to answer three questions at once, and tw
 
 <!-- filename: 2026-11-03-split-the-room-not-the-clock.md -->
 
-At 3 a.m. an 82-year-old gets out of bed. She crosses four metres of dark floor towards the bathroom, and somewhere between the bed and the doorway she goes down.
+At 3 a.m. an 82-year-old gets out of bed. She crosses two metres of dark floor towards the bathroom, and somewhere between the bed and the doorway she goes down.
 
 On the ceiling above her, one sensor has to answer three questions in the next thirty seconds — and it has to answer them while the bed she left is still occupied.
 
@@ -107,7 +107,7 @@ Each target carries a posture code. The published set:
 
 Read that carefully before designing a feature on top of it. These are **behavioural** postures — what someone is doing — not **sleep positions** — how a body is lying. On the back, on the left side, on the right side: all of them are code 7.
 
-That is not a gap in the software. It is what the geometry can support. The datasheet quotes a **height accuracy of 0.4 m** and an **angular accuracy of 10°**. The torso height difference between supine and side-lying is on the order of ten to twenty centimetres — comfortably inside the 0.4 m uncertainty. The two positions are not separable in the first place.
+That is not a gap in the software. It is what the geometry can support. The datasheet quotes a **height accuracy of 0.4 m** and an **angular accuracy of 10°**. Rotating a body from its back onto its side changes the cross-section the radar sees, but the resulting change in apparent height is a matter of centimetres — well inside a 0.4 m uncertainty. The two positions are not separable in the first place.
 
 The 10° figure is worth setting beside the theoretical one. A 4T4R array yields sixteen virtual channels, and at half-wavelength spacing the broadside resolution works out to about 7°. The published 10° is an accuracy figure, which is the honest number to design against rather than the theoretical floor. How channel count, layout and angular resolution relate is worked through in [Antenna Channels, Virtual Aperture]({{ site.baseurl }}{% post_url 2026-10-30-antenna-channels-virtual-aperture %}).
 

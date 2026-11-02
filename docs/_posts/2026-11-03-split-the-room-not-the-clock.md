@@ -19,7 +19,7 @@ In the next thirty seconds it has five jobs to do. And it has to do all of them 
 
 The **HT-W whole-home AI monitor** is a ceiling-mounted 60 GHz mmWave radar that reports events and device state over Wi-Fi. It does not form images and it does not record audio. What it works with is the echo: motion, position, and the sub-centimetre movement of a chest wall.
 
-The finished unit is built on the **R60BHC1-V**, a 4T4R FMCW module. That gives it sixteen virtual channels, but the interesting part is not the antenna count. It is that the device is allowed to ask more than one question of the same frame of data.
+It is a 4T4R FMCW design — sixteen virtual channels — but the interesting part is not the antenna count. It is that the device is allowed to ask more than one question of the same frame of data.
 
 Every radar we have written about here until now answered one question at a time. The presence radar answered *is anyone here*. The sleep radar answered *what was this person's night like*. The fall radar answered *has someone gone down*. Each was allowed to assume **one room, one person, one question** — and throwing away everything else is most of what made them cheap and reliable.
 
@@ -119,7 +119,7 @@ One integration note that matters more than the parsing: this is a **list**, not
 | Operating environment | -10 to +60 °C, 20–85% RH non-condensing |
 | Size / net weight | 89 × 21 mm / 54.2 g |
 
-**R60BHC1-V module** (datasheet V1.1; distances are projection radii for ceiling mounting)
+**4T4R module** (R60BHC1-V datasheet V1.1, ceiling-mount version; distances are projection radii for ceiling mounting)
 
 | Item | Value |
 |---|---|
@@ -146,7 +146,7 @@ Four numbers do not line up across the finished-unit manual, the module datashee
 | Installation height | 2.4–3.0 m; setting allows 2.0–3.0 m | 2.2–2.8 m |
 | People | 0–5 position tracking, 0–3 falls, 1 sleeper | 0–3 accurate; 8 in section 6.2, 10 in section 1.3 |
 
-Two practical rules follow. **Design against 0–3 people**, not 5, 8 or 10 — every source agrees on that figure, and the larger ones carry the same caveat about region occupancy. **Confirm the operating band with the manufacturer** before any certification work; the 1.5 GHz difference is not a rounding issue.
+Two practical rules follow. **Design against 0–3 people**, not 5, 8 or 10 — every source agrees on that figure, and the larger ones carry the same caveat about region occupancy. **Confirm the operating band with the manufacturer** before any certification work; 60–62 GHz and 61–61.5 GHz are not two ways of writing the same band.
 
 ## Three honest limits
 
